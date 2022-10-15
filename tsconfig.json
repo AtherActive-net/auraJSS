@@ -12,5 +12,5 @@
 		"declaration": true,
 		"module": "ES2020",
 	},
-	"include": ["src/"]
+	"include": ["src/**/*"],
 }

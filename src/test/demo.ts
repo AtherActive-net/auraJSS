@@ -1,30 +1,36 @@
 
 import {StyleSheet} from '../app.js';
-import {backgroundColor, color, RGB} from '../color.js';
-import {flexDirection, flexWrap} from '../flex.js';
-import {display, margin, padding, selector} from '../basics.js';
-import {border, borderRadius} from '../border.js';
+import {selector, display, padding, margin, width, height, RGB, backgroundColor, color, position, top, flex} from '../style.js';
 
-const darkgrey = new RGB(20, 20, 20);
+const dark = new RGB(20,20,20);
+const navbarDark = new RGB(15,15,15);
+const white = new RGB(25,255,255);
+
 
 const sheet = new StyleSheet([
-    selector('div', [
-        backgroundColor(darkgrey),
-        border('rem',0.1,'solid',new RGB(255,0,0)),
-        borderRadius('rem',0.5),
-    ]),
-
-    selector('body',[
-        display('block'),
-        margin('rem',0,0,0,0)
+    selector('body', [
+        margin({auto: true}),
+        padding({unit: 'px', top: 0, right: 0, bottom: 0, left: 0}),
+        backgroundColor(dark),
+        color(white),
     ]),
 
     selector('nav', [
-        display('flex'),
-        flexDirection('row'),
-        flexWrap('wrap'),
-        backgroundColor(darkgrey),
+        selector('&#top', [
+            position('fixed'),
+            top('px', 0),
+            height({value: {unit: 'rem', value: 5}}),
+            backgroundColor(navbarDark),
+        ])
+    ]),
+
+    selector('col', [
+        flex({
+            direction: 'column',
+            wrap: 'nowrap',
+            alignContent: 'flex-start',
+        })
     ])
-])
+]);
 
 export default sheet;
