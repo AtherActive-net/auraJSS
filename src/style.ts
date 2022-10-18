@@ -91,7 +91,7 @@ export function padding(opts:Partial<PaddingMargin>) {
     if(opts.auto) {
         return {padding: 'auto'}
     }
-    return {"padding": `${opts.top}${opts.unit} ${opts.right}${opts.unit} ${opts.bottom}${opts.unit} ${opts.left}${opts.unit}`}
+    return {"padding": `${opts.top|0}${opts.unit} ${opts.right|0}${opts.unit} ${opts.bottom|0}${opts.unit} ${opts.left|0}${opts.unit}`}
 }
 
 /**
@@ -105,12 +105,19 @@ export function padding(opts:Partial<PaddingMargin>) {
  */
  export function margin(opts:Partial<PaddingMargin>={unit:'px', top:0, right:0, bottom:0, left:0, auto:false}) {
     if(!opts) throw new ParameterError()
+    if(!opts.unit) opts.unit = 'px'
     if(opts.auto) {
         return {"margin": `auto`}
     }
-    return {"margin": `${opts.top}${opts.unit} ${opts.right}${opts.unit} ${opts.bottom}${opts.unit} ${opts.left}${opts.unit}`}
+    return {"margin": `${opts.top|0}${opts.unit} ${opts.right|0}${opts.unit} ${opts.bottom|0}${opts.unit} ${opts.left|0}${opts.unit}`}
 }
 
+/**
+ * Set an elements Width. You can set the current, minimum, and maximum width.
+ * @param min Minimum width
+ * @param value Current width
+ * @param max Maximum width
+ */
 export function width(opts:Partial<WidthHeight>) {
     let out = {};
     if(opts.min) out['min-width'] = `${opts.min.value}${opts.min.unit}`;
@@ -119,6 +126,12 @@ export function width(opts:Partial<WidthHeight>) {
     return out;
 }
 
+/**
+ * Set an elements Height. You can set the current, minimum, and maximum height.
+ * @param min Minimum height
+ * @param value Current height
+ * @param max Maximum height
+ */
 export function height(opts:Partial<WidthHeight>) {
     let out = {};
     if(opts.min) out['min-height'] = `${opts.min.value}${opts.min.unit}`;
@@ -165,7 +178,7 @@ export function cursor(value:'auto' | 'default' | 'none' | 'context-menu' | 'hel
 }
 
 /**
- * What direction should text be displayed?
+ * Set in what direction text is displayed.
  * @param value The value of this property ('ltr' | 'rtl')
  */
 export function direction(value:'ltr' | 'rtl') {
