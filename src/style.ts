@@ -70,6 +70,10 @@ export {
     return {selector, style}
 }
 
+export function media(query:string, styles:Array<Object>) {
+    return {media: query, styles: styles}
+}
+
 /**
  * CSS Display property
  * @param opt Display option

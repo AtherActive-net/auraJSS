@@ -15,8 +15,8 @@ export async function compile(opts:CompilerOptions={inpath:undefined}) {
     styleSheet = styleSheet.default;
     if(!styleSheet) throw new CompileError('No default export found in stylesheet. This must be set to a StyleSheet object.');
     
-    compilerLog(`Starting compilation of '${opts.inpath}'`);
-    compilerLog(`Found ${styleSheet.styles.length} base level styles..`);
+    if(!opts.silent) compilerLog(`Starting compilation of '${opts.inpath}'`);
+    if(!opts.silent) compilerLog(`Found ${styleSheet.styles.length} base level styles..`);
 
     // Check if there are any obvious errors in the stylesheet.
     errorCheckSheet(styleSheet.styles);
@@ -24,7 +24,7 @@ export async function compile(opts:CompilerOptions={inpath:undefined}) {
     // Loop over all styles and generate CSS, then write it to a file.
     const css = loopStyles(styleSheet.styles);
     if(opts.outpath) {
-        compilerLog(`Writing compiled CSS to '${opts.outpath}'`);
+        if(!opts.silent) compilerLog(`Writing compiled CSS to '${opts.outpath}'`);
         fs.writeFileSync(opts.outpath, css);
     }
     return css;
@@ -60,6 +60,13 @@ function loopStyles(styles:Array<any>, parent?:string) {
         else if(style.include) {
             css += loopStyles(style.include.styles, parent);
         }
+        // Media queries need to be handled separately
+        else if(style.media) {
+            css += `@media ${style.media} {`;
+            css += loopStyles(style.styles, parent);
+            css += '}';
+        }
+        // If it is an array of styles, loop over them
         else if(style instanceof Array<any>) {
             css += loopStyles(style, parent);
         }
