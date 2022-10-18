@@ -14,8 +14,6 @@ export async function compile(path:string,out:string = 'aurajs.css') {
     styleSheet = styleSheet.default;
     if(!styleSheet) throw new CompileError('No default export found in stylesheet. This must be set to a StyleSheet object.');
     
-    console.log(styleSheet.styles);
-
     // Check if there are any obvious errors in the stylesheet.
     errorCheckSheet(styleSheet.styles);
 
