@@ -21,6 +21,8 @@ export interface WidthHeight {
 }
 
 export interface CompilerOptions {
+    inpath: string,
+    outpath?: string,
     silent?: boolean,
     removeEmptySelectors?: boolean,
 }
