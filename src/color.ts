@@ -1,8 +1,11 @@
+import { Style } from "./baseclasses.js";
+
 /**
  * A simple RGB color class. Allows for easy manipulation of colors.
  */
-export class RGB {
+export class RGB extends Style {
     constructor(public r:number, public g:number, public b:number) {
+        super();
         this.r = r;
         this.g = g;
         this.b = b;
@@ -14,6 +17,10 @@ export class RGB {
      */
     public toString() {
         return `rgb(${this.r}, ${this.g}, ${this.b})`;
+    }
+
+    public loopToString() {
+        return this.toString();
     }
 }
 
@@ -30,7 +37,7 @@ export function color(color:RGB) {
  * @param color A color to apply to the background
  */
 export function backgroundColor(color:RGB) {
-    return {"background-color": color}
+    return {"background-color": color.toString()}
 }
 
 
