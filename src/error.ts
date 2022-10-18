@@ -14,3 +14,11 @@ export class ParameterError extends Error {
         this.name = "ParameterError";
     }
 }
+
+export class CompileError extends Error {
+    constructor(message:string) {
+        let formatted = `An error occured while compiling the stylesheet.\n\n${message}\n`;
+        super(formatted);
+        this.name = "CompileError";
+    }
+}

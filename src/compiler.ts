@@ -1,4 +1,4 @@
-import { StyleError } from './error.js';
+import { StyleError, CompileError } from './error.js';
 import fs from 'fs';
 
 /**
@@ -9,8 +9,17 @@ import fs from 'fs';
  */
 export async function compile(path:string,out:string = 'aurajs.css') {
     let styleSheet = await import(path);
+
+    // Get the default export from the stylesheet.
     styleSheet = styleSheet.default;
+    if(!styleSheet) throw new CompileError('No default export found in stylesheet. This must be set to a StyleSheet object.');
+    
+    console.log(styleSheet.styles);
+
+    // Check if there are any obvious errors in the stylesheet.
     errorCheckSheet(styleSheet.styles);
+
+    // Loop over all styles and generate CSS, then write it to a file.
     const css = loopStyles(styleSheet.styles);
     fs.writeFileSync(out, css);
     return css;
@@ -46,6 +55,9 @@ function loopStyles(styles:Array<any>, parent?:string) {
         else if(style.include) {
             css += loopStyles(style.include.styles, parent);
         }
+        else if(style instanceof Array<any>) {
+            css += loopStyles(style, parent);
+        }
         // If it is none of the above, it is a style.
         else {
             // console.log(Object.keys(style), Object.values(style));
@@ -70,9 +82,9 @@ function errorCheckSheet(styles:Array<any>,parent=undefined) {
             selectorFound = true;
             errorCheckSheet(style.style, style.selector);
         } else {
-            if(selectorFound) {
-                throw new StyleError(style,parent);
-            }
+            // if(selectorFound) {
+            //     throw new StyleError(style,parent);
+            // }
         }
         
     });
