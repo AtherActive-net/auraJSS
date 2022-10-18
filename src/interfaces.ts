@@ -35,3 +35,11 @@ export interface FlexOptions {
     justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly',
     alignItems?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch'
 }
+
+export interface FontOptions {
+    family?: string,
+    size?: UnitValue,
+    weight?: 'normal' | 'bold' | 'bolder' | 'lighter' | number,
+    style?: 'normal' | 'italic' | 'oblique',
+    variant?: 'normal' | 'small-caps',
+}
