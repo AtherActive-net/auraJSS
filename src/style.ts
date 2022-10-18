@@ -55,6 +55,16 @@ export {
  * A selector to select a CSS class.
  * @param selector CSS selector. You can use `&` to apply something to the current selector.
  * @param style Styles to apply to the selector
+ * 
+ * A regular selector (Selecting the .test class)
+ * ```ts
+ * selector('.test',[])
+ * ```
+ * 
+ * Selecting a psuedo class (Selecting the .test:hover class)
+ * ```ts
+ * selector('.test',[ selector('&:hover',[]) ])
+ * ```
  */
  export function selector(selector:string, style:Array<any>) {
     return {selector, style}
