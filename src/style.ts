@@ -3,7 +3,7 @@ import { ParameterError } from "./error.js"
 
 // Styles imported from the /styles folder
 import { unit } from "./util.js"
-import { RGB, color, backgroundColor } from "./color.js"
+import { RGB, color, backgroundColor } from "./styles/color.js"
 import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize} from "./styles/background.js"
 import { position, top,left,right,bottom,zIndex } from "./styles/position.js"
 import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js"

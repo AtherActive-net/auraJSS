@@ -1,5 +1,5 @@
 import { unit } from "../util.js";
-import { RGB } from "../color.js";
+import { RGB } from "./color";
 /**
  * Create a new Border.
  * @param unit Unit of measurement (px,em,rem)

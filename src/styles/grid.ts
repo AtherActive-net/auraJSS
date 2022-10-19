@@ -1,5 +1,5 @@
-import { ParameterError } from "error";
-import { GridOptions } from "interfaces";
+import { ParameterError } from "../error.js";
+import { GridOptions } from "../interfaces.js";
 
 /**
  * Create a grid layout.

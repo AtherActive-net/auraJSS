@@ -1,4 +1,4 @@
-import { Style } from "./baseclasses.js";
+import { Style } from "../baseclasses.js";
 
 /**
  * A simple RGB color class. Allows for easy manipulation of colors.
