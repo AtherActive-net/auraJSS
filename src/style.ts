@@ -74,6 +74,11 @@ export {
     return {selector, style}
 }
 
+/**
+ * Create a new media query.
+ * @param query The query. For example: `only screen and (min-width: 768px)`
+ * @param styles Styles/selctors which will be part of this media query
+ */
 export function media(query:string, styles:Array<Object>) {
     return {media: query, styles: styles}
 }
