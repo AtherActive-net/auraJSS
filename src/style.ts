@@ -9,6 +9,7 @@ import { position, top,left,right,bottom,zIndex } from "./styles/position.js"
 import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js"
 import { flex } from "./styles/flex.js"
 import { font } from "./styles/font.js"
+import { grid } from "./styles/grid.js"
 
 export {
     // Color
@@ -48,7 +49,10 @@ export {
     flex,
 
     // Font
-    font
+    font,
+
+    // grid
+    grid
 }
 
 /**

@@ -45,3 +45,12 @@ export interface FontOptions {
     style?: 'normal' | 'italic' | 'oblique',
     variant?: 'normal' | 'small-caps',
 }
+
+export interface GridOptions {
+    row: 'none'|'auto'|'max-content'|'min-content'|UnitValue,
+    column: 'none'|'auto'|'max-content'|'min-content'|UnitValue,
+    areas: string,
+    autoRows: 'none'|'auto'|'max-content'|'min-content'|UnitValue,
+    autoColumns: 'none'|'auto'|'max-content'|'min-content'|UnitValue,
+    autoFlow: 'row'|'column'|'row dense'|'column dense'
+}
