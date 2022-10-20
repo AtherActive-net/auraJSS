@@ -1,8 +1,13 @@
 import { PaddingMargin, UnitValue, WidthHeight } from "./interfaces.js"
 import { ParameterError } from "./error.js"
 
+// Basic exports
+import { compile } from "./compiler.js"
+import Stylesheet from "./stylesheet.js"
+import * as builtin from "./builtin.js"
+
 // Styles imported from the /styles folder
-import { unit } from "./util.js"
+import { unit, include } from "./util.js"
 import { RGB, color, backgroundColor } from "./styles/color.js"
 import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize} from "./styles/background.js"
 import { position, top,left,right,bottom,zIndex } from "./styles/position.js"
@@ -12,11 +17,19 @@ import { font } from "./styles/font.js"
 import { grid } from "./styles/grid.js"
 
 export {
+    // basic
+    Stylesheet,
+    compile,
+    builtin,
+
+    // other
+    unit,
+    include,
+    
     // Color
     RGB,
     color,
     backgroundColor,
-    unit,
 
     // Background
     backgrondPosition,

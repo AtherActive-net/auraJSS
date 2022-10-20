@@ -1,14 +1,11 @@
 {
-  "name": "test",
+  "name": "aurajss",
   "version": "1.0.0",
-  "description": "",
-  "main": "./dist/app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "AuraJSS allows for the creation of CSS Stylesheets with Javascript/Typescript.",
+  "main": "./dist/style.js",
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "types": "./dist/app.d.ts",
+  "author": "ATHER",
+  "license": "MIT",
+  "types": "./dist/style.d.ts",
   "type": "module"
 }
