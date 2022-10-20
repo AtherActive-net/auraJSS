@@ -24,7 +24,6 @@ export async function compile(opts:CompilerOptions={input:undefined}) {
     if(!styleSheet) throw new CompileError('No default export found in stylesheet. This must be set to a StyleSheet object.');
     
     if(!opts.silent) compilerLog(`Starting compilation of '${opts.input}'`);
-    if(!opts.silent) console.time('AuraJSS_Compiler')
 
     // Check if there are any obvious errors in the stylesheet.
     errorCheckSheet(styleSheet.styles);
@@ -60,7 +59,6 @@ function loopStyles(styles:Array<any>, parent?:string) {
                 css += '}'
                 closed = true;
             }
-            // console.log(style.selector);
             css += `${style.selector} {`;
             css += loopStyles(style.style, style.selector);
             if(!closed) css += '}';
@@ -81,7 +79,6 @@ function loopStyles(styles:Array<any>, parent?:string) {
         }
         // If it is none of the above, it is a style.
         else {
-            // console.log(Object.keys(style), Object.values(style));
             css += Object.keys(style).map((key,i) => {
                 return `${key}: ${Object.values(style)[i]};`
             }).join('');
