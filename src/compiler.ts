@@ -4,19 +4,27 @@ import { CompilerOptions } from 'interfaces.js';
 
 /**
  * Compile AuraJS stylesheets into CSS
- * @param path input file path
- * @param out output file path
- * @returns A written file containing the generated CSS. It also returns the CSS string. Should of course not be used in production.
+ * @param input The input file. You can also directly specify a Stylesheet object.
+ * @param outpath output file path
+ * @param silent Define wether or not the compiler should log messages (default: true)
+ * @returns A written file containing the generated CSS. It also returns the CSS string.
  */
-export async function compile(opts:CompilerOptions={inpath:undefined}) {
-    let styleSheet = await import(opts.inpath);
+export async function compile(opts:CompilerOptions={input:undefined}) {
+    if(!opts.input) throw new CompileError('Missing required input option');
+    let styleSheet;
 
-    // Get the default export from the stylesheet.
-    styleSheet = styleSheet.default;
+    if(typeof opts.input === 'string') {
+        styleSheet = await import(opts.input);
+        // Get the default export from the stylesheet.
+        styleSheet = styleSheet.default;
+    } else if(typeof opts.input === 'object') {
+        styleSheet = opts.input;
+    }
+
     if(!styleSheet) throw new CompileError('No default export found in stylesheet. This must be set to a StyleSheet object.');
     
-    if(!opts.silent) compilerLog(`Starting compilation of '${opts.inpath}'`);
-    if(!opts.silent) compilerLog(`Found ${styleSheet.styles.length} base level styles..`);
+    if(!opts.silent) compilerLog(`Starting compilation of '${opts.input}'`);
+    if(!opts.silent) console.time('AuraJSS_Compiler')
 
     // Check if there are any obvious errors in the stylesheet.
     errorCheckSheet(styleSheet.styles);
@@ -27,6 +35,7 @@ export async function compile(opts:CompilerOptions={inpath:undefined}) {
         if(!opts.silent) compilerLog(`Writing compiled CSS to '${opts.outpath}'`);
         fs.writeFileSync(opts.outpath, css);
     }
+    if(!opts.silent) compilerLog(`Finished compilation of '${opts.input}'`);
     return css;
 }
 
@@ -107,5 +116,5 @@ function errorCheckSheet(styles:Array<any>,parent=undefined) {
  * @param msg Message to log
  */
 function compilerLog(msg:string) {
-    console.log(`[AuraJS] ${msg}`)
+    console.log(`[AuraJSS] ${msg}`)
 }

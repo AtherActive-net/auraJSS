@@ -1,3 +1,4 @@
+import { Stylesheet } from "./style.js"
 import { unit } from "./util.js"
 
 export interface PaddingMargin {
@@ -21,7 +22,7 @@ export interface WidthHeight {
 }
 
 export interface CompilerOptions {
-    inpath: string,
+    input: string|Stylesheet,
     outpath?: string,
     silent?: boolean,
     removeEmptySelectors?: boolean,
