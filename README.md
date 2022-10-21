@@ -1,4 +1,7 @@
 # AuraJSS - Styling with JavaScript made easy
+```
+Note: AuraJSS is still in active development. Some things may not work as expected and may change at any point.
+```
 AuraJSS is a library that allows you to create fully fledged stylesheets using Javascript. With a high focus on being dynamic, you can choose to compile to file, or to do it on the fly!
 
 ## But why?
