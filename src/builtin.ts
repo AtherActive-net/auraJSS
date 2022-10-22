@@ -33,7 +33,7 @@ function generateWithBreakpoints(selectorString:string, breakpoints:Object,divis
         let out = [];
         for(let size in breakpoints) {
             out.push([
-                media(`only screen and (min-width: ${breakpoints[size]}px)`,[
+                media(`only screen and (max-width: ${breakpoints[size]}px)`,[
                     selector(`${selectorString}-${size}-${index}`,[
                         width({
                             value: {

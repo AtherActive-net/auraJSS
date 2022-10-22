@@ -1,9 +1,9 @@
 {
   "name": "aurajss",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AuraJSS allows for the creation of CSS Stylesheets with Javascript/Typescript.",
   "main": "./dist/style.js",
-  "keywords": [],
+  "keywords": ["css", "stylesheet", "javascript", "typescript", "ATHER", "style", "AuraJSS"],
   "author": "ATHER",
   "license": "MIT",
   "types": "./dist/style.d.ts",
