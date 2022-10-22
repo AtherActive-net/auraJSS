@@ -101,3 +101,17 @@ export function generateColorClasses(colors:Object) {
     }
     return out;
 }
+
+/**
+ * Generate Background Color classes automatically. These classes will look like this: `.bg-[color]`
+ * @param colors The object of colors to generate classes for. It should be noted that only a key:value pair of the RGB class is supported.
+ */
+ export function generateBackgroundColorClasses(colors:Object) {
+    let out = [];
+    for (let color in colors) {
+        out.push(selector(`.bg-${color}`,[
+            {'background-color': colors[color]}
+        ]))
+    }
+    return out;
+}
