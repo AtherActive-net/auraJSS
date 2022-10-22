@@ -4,7 +4,7 @@ import { selector,media,width,margin,flex } from "./style.js";
 //  Used to generate a grid system
 //
 
-const defaultPoints = {
+export const defaultBreakPoints = {
     xs: 300,
     s: 576,
     m: 768,
@@ -19,7 +19,7 @@ const defaultPoints = {
  * @param divisionCount The number of divisions in the grid (default: `12`)
  * @param breakpoints The breakpoints to use in the grid. (default: `{xs: 300, s: 576, m: 768, l: 992, xl: 1200, xxl: 1400}`)
  */
-export function generateGridSystem(divisionCount:number, breakpoints:Object=defaultPoints) {
+export function generateGridSystem(divisionCount:number, breakpoints:Object=defaultBreakPoints) {
     let out = [];
 
     out.push(generateColumns(breakpoints, divisionCount));
@@ -61,7 +61,7 @@ function generateWithBreakpoints(selectorString:string, breakpoints:Object,divis
     return out
 }
 
-function generateColumns(breakpoints:Object=defaultPoints, divisions:number=12) {
+function generateColumns(breakpoints:Object=defaultBreakPoints, divisions:number=12) {
     let out:Array<Object> = [
         selector(".col,[class^='col-'],[class^=' col-']", [
             flex({direction: 'column'}),
@@ -73,7 +73,7 @@ function generateColumns(breakpoints:Object=defaultPoints, divisions:number=12) 
 
 }
 
-function generateContainers(breakpoints:Object=defaultPoints, divisions:number=12) {
+function generateContainers(breakpoints:Object=defaultBreakPoints, divisions:number=12) {
     let out:Array<Object> = [
         selector(".container,[class^='container-'],[class^=' container-']", [
             flex({direction: 'column'}),

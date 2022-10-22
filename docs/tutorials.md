@@ -5,9 +5,9 @@ On this page we'll go over some basic tutorials to get you started! These will n
 The quickstart guide can be found [here](https://github.com/AtherActive-net/auraJSS)
 
 ## Built-in functions
-AuraJSS provides a few built-in functions that can take care of some common things. Let's quickly go over them.
+AuraJSS provides a few built-in functions that can take care of some common things. You can access these by importing `builtin` from `aurajss`. Let's take a look at some of them.
 
-### generateGridSystem(divisions, breakpoints?)
+### generateGridSystem(breakpoints?, divisions?)
 When you call this function (and provide a division count) it will generate a bootstrap-like grid system. You can also provide your own breakpoints and names for them. In the end you will by default get a flexbox grid system ranging from `xs` to `xxl` with containers and columns. Rows are obviously also included.
 
 ### generateColorClasses(colors)
@@ -17,7 +17,7 @@ With this function you can let AuraJSS automatically generate `.color-[color]` c
 This function does pretty much the same as the above one, but now it generates `.bg-[color]` classes for you.
 
 ## Looping styles
-AuraJSS does not provide a built-in loop function for the stylesheet as this would create a terrible developer experience. Instead, we allow other functions that are not provided by us to handle this taks.
+AuraJSS does not provide a built-in loop function for the stylesheet as this would create a terrible developer experience. Instead, we allow other functions that are not provided by us to handle this task.
 
 Let's create a quick demo. Below we will create a Stylesheet and also a loop function.
 ```ts
