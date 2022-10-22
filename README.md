@@ -6,7 +6,7 @@ Some things may not work as expected and may change at any point.
 AuraJSS is a library that allows you to create fully fledged stylesheets using Javascript. With a high focus on being dynamic, you can choose to compile to file, or to do it on the fly!
 
 ## But why?
-Honestly, it started out as a small little fun project. This quickly became more serious though and is now being developed to be extremely usable and fast.col
+Honestly, it started out as a small little fun project. This quickly became more serious though and is now being developed to be extremely usable and fast!
 
 ## Quickstart
 First, you will need to install AuraJSS from NPM.
@@ -61,10 +61,11 @@ Now, if you run your script, it will start compiling the Stylesheet into CSS and
 ## Resources
 - [NPM](https://www.npmjs.com/package/aurajss)
 - [API Reference](https://wiki.atherdev.nl/aurajss/api)
+- [Massive import](https://noteit.atherdev.nl/note/2)
 - [ATHER](https://atherdev.nl)
 
 ## Contributing
-We are open to your contributions! Please make sure you keep to the same style we use (eslint config coming soon) and that you test your code before submitting a PR. Additionally, make sure it is properly documented
+We are open to your contributions! Please make sure you keep to the same style we use (eslint config coming soon) and that you test your code before submitting a PR. Additionally, make sure it is properly documented.
 
 ### Setting up for contribution
 Setup up for contribution is extremely simple, as we have 0 (direct) dependencies. However, to actually run your code having typescript installed globally is a good idea. You can do this with `npm i -g typescript`.
