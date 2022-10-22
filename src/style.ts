@@ -15,7 +15,7 @@ import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollaps
 import { flex } from "./styles/flex.js"
 import { font } from "./styles/font.js"
 import { grid } from "./styles/grid.js"
-import { listStyle } from "styles/list.js"
+import { listStyle } from "./styles/list.js"
 
 export {
     // basic
