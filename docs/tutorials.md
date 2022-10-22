@@ -10,6 +10,8 @@ AuraJSS provides a few built-in functions that can take care of some common thin
 ### generateGridSystem(breakpoints?, divisions?)
 When you call this function (and provide a division count) it will generate a bootstrap-like grid system. You can also provide your own breakpoints and names for them. In the end you will by default get a flexbox grid system ranging from `xs` to `xxl` with containers and columns. Rows are obviously also included.
 
+Note: To set your own divisions you will ahve to set the breakpoints too. The default breakpoints are exported by `builtin` and are called `defaultBreakPoints`.
+
 ### generateColorClasses(colors)
 With this function you can let AuraJSS automatically generate `.color-[color]` classes for you by just providing an object with a key:value pair of colors. This one is specifically for text colors.
 
