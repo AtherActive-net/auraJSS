@@ -18,10 +18,6 @@ export class RGB extends Style {
     public toString() {
         return `rgb(${this.r}, ${this.g}, ${this.b})`;
     }
-
-    public loopToString() {
-        return this.toString();
-    }
 }
 
 /**
