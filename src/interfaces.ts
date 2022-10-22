@@ -55,3 +55,9 @@ export interface GridOptions {
     autoColumns: 'none'|'auto'|'max-content'|'min-content'|UnitValue,
     autoFlow: 'row'|'column'|'row dense'|'column dense'
 }
+
+export interface ListStyle {
+    type?: 'none' | 'disc' | 'circle' | 'square' | 'decimal' | 'decimal-leading-zero' | 'lower-roman' | 'upper-roman' | 'lower-greek' | 'lower-latin' | 'upper-latin' | 'armenian' | 'georgian' | 'lower-alpha' | 'upper-alpha' | 'inherit',
+    position?: 'inside' | 'outside',
+    image?: string,
+}
