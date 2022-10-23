@@ -48,7 +48,6 @@ function loopStyles(styles:Array<any>, parent?:string) {
     let css = '';
     let closed = false;
     styles.forEach(async (style) => {
-
         if(style.selector) {
             if (parent) {
                 if(style.selector.startsWith('&')) {
@@ -70,6 +69,17 @@ function loopStyles(styles:Array<any>, parent?:string) {
         // Media queries need to be handled separately
         else if(style.media) {
             css += `@media ${style.media} {`;
+            css += loopStyles(style.styles, parent);
+            css += '}';
+        }
+        else if(style.name) {
+            // now it is a CSS animation
+            css += `@keyframes ${style.name} {`;
+            css += loopStyles(style.keyframes, parent);
+            css += '}';
+        }
+        else if(style.percent !== undefined) {
+            css += `${style.percent}% {`;
             css += loopStyles(style.styles, parent);
             css += '}';
         }

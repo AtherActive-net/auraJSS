@@ -61,3 +61,20 @@ export interface ListStyle {
     position?: 'inside' | 'outside',
     image?: string,
 }
+
+export interface Animation {
+    name?: string,
+    duration?: UnitValue,
+    timing?: 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'step-start' | 'step-end',
+    delay?: UnitValue,
+    iteration?: number,
+    direction?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse',
+    fillMode?: 'none' | 'forwards' | 'backwards' | 'both',
+    playState?: 'running' | 'paused',
+}
+
+export interface Keyframe {
+    from?: Object,
+    to?: Object,
+    percent?: number,
+}

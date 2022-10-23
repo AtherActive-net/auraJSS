@@ -1,6 +1,6 @@
 import StyleSheet from "stylesheet"
 
-export type unit = 'px'|'em'|'rem'|'vh'|'vw'|'vmin'|'vmax'|'%'|''
+export type unit = 'px'|'em'|'rem'|'vh'|'vw'|'vmin'|'vmax'|'%'|'s'|''
 
 /**
  * Include another stylesheet inside a stylesheet.
