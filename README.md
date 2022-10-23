@@ -61,7 +61,7 @@ Now, if you run your script, it will start compiling the Stylesheet into CSS and
 ## Resources
 - [NPM](https://www.npmjs.com/package/aurajss)
 - [Tutorials](https://github.com/AtherActive-net/auraJSS/blob/main/docs/tutorials.md)
-- [API Reference](https://wiki.atherdev.nl/aurajss/api) - Available soon.
+- [API Reference](https://atheractive-net.github.io/auraJSS/index.html)
 - [Massive import](https://noteit.atherdev.nl/note/2)
 - [ATHER](https://atherdev.nl)
 
