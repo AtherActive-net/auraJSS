@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: style.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: style.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { ParameterError } from "./error.js";
+// Basic exports
+import { compile } from "./compiler.js";
+import Stylesheet from "./stylesheet.js";
+import * as builtin from "./builtin.js";
+// Styles imported from the /styles folder
+import { include } from "./util.js";
+import { RGB, color, backgroundColor } from "./styles/color.js";
+import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize } from "./styles/background.js";
+import { position, top, left, right, bottom, zIndex } from "./styles/position.js";
+import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js";
+import { flex } from "./styles/flex.js";
+import { font } from "./styles/font.js";
+import { grid } from "./styles/grid.js";
+import { listStyle } from "./styles/list.js";
+export { 
+// basic
+Stylesheet, compile, builtin, include, 
+// Color
+RGB, color, backgroundColor, 
+// Background
+backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize, 
+// Position
+position, top, left, right, bottom, zIndex, 
+// Border
+border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage, 
+// flex
+flex, 
+// Font
+font, 
+// grid
+grid, 
+// List
+listStyle };
+/**
+ * A selector to select a CSS class.
+ * @param selector CSS selector. You can use `&amp;` to apply something to the current selector.
+ * @param style Styles to apply to the selector
+ *
+ * A regular selector (Selecting the .test class)
+ * ```ts
+ * selector('.test',[])
+ * ```
+ *
+ * Selecting a psuedo class (Selecting the .test:hover class)
+ * ```ts
+ * selector('.test',[ selector('&amp;:hover',[]) ])
+ * ```
+ */
+export function selector(selector, style) {
+    return { selector, style };
+}
+/**
+ * Create a new media query.
+ * @param query The query. For example: `only screen and (min-width: 768px)`
+ * @param styles Styles/selctors which will be part of this media query
+ */
+export function media(query, styles) {
+    return { media: query, styles: styles };
+}
+/**
+ * CSS Display property
+ * @param opt Display option
+ */
+export function display(opt) {
+    return { display: opt };
+}
+/**
+ * Apply padding to an element.
+ * @param unit Unit of measurement (default: `px`)
+ * @param top Top padding (default: `0`)
+ * @param right Right padding (default: `0`)
+ * @param bottom Bottom padding (default: `0`)
+ * @param left Left padding (default: `0`)
+ * @param auto Auto padding. Overrides other parameters (default: `false`)
+ */
+export function padding(opts) {
+    if (opts.auto) {
+        return { padding: 'auto' };
+    }
+    return { "padding": `${opts.top | 0}${opts.unit} ${opts.right | 0}${opts.unit} ${opts.bottom | 0}${opts.unit} ${opts.left | 0}${opts.unit}` };
+}
+/**
+ * Apply margin to an element.
+ * @param unit Unit of measurement (default: `px`)
+ * @param top Top margin (default: `0`)
+ * @param right Right margin (default: `0`)
+ * @param bottom Bottom margin (default: `0`)
+ * @param left Left margin (default: `0`)
+ * @param auto Auto margin. Overrides other parameters (default: `false`)
+ */
+export function margin(opts = { unit: 'px', top: 0, right: 0, bottom: 0, left: 0, auto: false }) {
+    if (!opts)
+        throw new ParameterError();
+    if (!opts.unit)
+        opts.unit = 'px';
+    if (opts.auto) {
+        return { "margin": `auto` };
+    }
+    return { "margin": `${opts.top | 0}${opts.unit} ${opts.right | 0}${opts.unit} ${opts.bottom | 0}${opts.unit} ${opts.left | 0}${opts.unit}` };
+}
+/**
+ * Set an elements Width. You can set the current, minimum, and maximum width.
+ * @param min Minimum width
+ * @param value Current width
+ * @param max Maximum width
+ */
+export function width(opts) {
+    let out = {};
+    if (opts.min)
+        out['min-width'] = `${opts.min.value}${opts.min.unit}`;
+    if (opts.max)
+        out['max-width'] = `${opts.max.value}${opts.max.unit}`;
+    if (opts.value)
+        out['width'] = `${opts.value.value}${opts.value.unit}`;
+    return out;
+}
+/**
+ * Set an elements Height. You can set the current, minimum, and maximum height.
+ * @param min Minimum height
+ * @param value Current height
+ * @param max Maximum height
+ */
+export function height(opts) {
+    let out = {};
+    if (opts.min)
+        out['min-height'] = `${opts.min.value}${opts.min.unit}`;
+    if (opts.max)
+        out['max-height'] = `${opts.max.value}${opts.max.unit}`;
+    if (opts.value)
+        out['height'] = `${opts.value.value}${opts.value.unit}`;
+    return out;
+}
+/**
+ * Create a new shadow.
+ * @param unit The unit to use (This is used for ALL values below)
+ * @param hOffset The horizontal offset of the shadow
+ * @param vOffset The vertical offset of the shadow
+ * @param blur The blur distance
+ * @param spread The spread of the shadow
+ * @param color The color of the shadow
+ */
+export function shadow(unit, hOffset = 0, vOffset = 0, blur = 0, spread = 0, color) {
+    return { 'box-shadow': `${hOffset}${unit} ${vOffset}${unit} ${blur}${unit} ${spread}${unit} ${color}` };
+}
+/**
+ * How is the width/height of an element calculated.
+ * @param value The value of this property ('content-box', 'border-box')
+ */
+export function boxSizing(value) {
+    return { 'box-sizing': value };
+}
+/**
+ * Set the content property. Required for pseudo elements (::before / ::after).
+ * @param value The value to set this property to
+ */
+export function content(value) {
+    return { 'content': value };
+}
+/**
+ * Set which curser should be displayed when hovering over an element.
+ * @param value The value of this property ('auto' | 'default' | 'none' | 'context-menu' | 'help' | 'pointer' | 'progress' | 'wait' | 'cell' | 'crosshair' | 'text' | 'vertical-text' | 'alias' | 'copy' | 'move' | 'no-drop' | 'not-allowed' | 'e-resize' | 'n-resize' | 'ne-resize' | 'nw-resize' | 's-resize' | 'se-resize' | 'sw-resize' | 'w-resize' | 'ew-resize' | 'ns-resize' | 'nesw-resize' | 'nwse-resize' | 'col-resize' | 'row-resize' | 'all-scroll' | 'zoom-in' | 'zoom-out' | 'grab' | 'grabbing' | 'inherit')
+ */
+export function cursor(value) {
+    return { 'cursor': value };
+}
+/**
+ * Set in what direction text is displayed.
+ * @param value The value of this property ('ltr' | 'rtl')
+ */
+export function direction(value) {
+    return { 'direction': value };
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="StyleSheet.html">StyleSheet</a></li></ul><h3>Global</h3><ul><li><a href="global.html#boxSizing">boxSizing</a></li><li><a href="global.html#compile">compile</a></li><li><a href="global.html#compilerLog">compilerLog</a></li><li><a href="global.html#content">content</a></li><li><a href="global.html#cursor">cursor</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#display">display</a></li><li><a href="global.html#errorCheckSheet">errorCheckSheet</a></li><li><a href="global.html#generateBackgroundColorClasses">generateBackgroundColorClasses</a></li><li><a href="global.html#generateColorClasses">generateColorClasses</a></li><li><a href="global.html#generateGridSystem">generateGridSystem</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#include">include</a></li><li><a href="global.html#loopStyles">loopStyles</a></li><li><a href="global.html#margin">margin</a></li><li><a href="global.html#media">media</a></li><li><a href="global.html#padding">padding</a></li><li><a href="global.html#selector">selector</a></li><li><a href="global.html#shadow">shadow</a></li><li><a href="global.html#width">width</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sun Oct 23 2022 16:50:33 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

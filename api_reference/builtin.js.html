@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: builtin.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: builtin.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { selector, media, width, margin, flex } from "./style.js";
+//
+//  Used to generate a grid system
+//
+export const defaultBreakPoints = {
+    xs: 300,
+    s: 576,
+    m: 768,
+    l: 992,
+    xl: 1200,
+    xxl: 1400
+};
+/**
+ * Generate a Grid system using Flexbox.
+ * Generates `.col`, `.row` `.container` classes.
+ * @param divisionCount The number of divisions in the grid (default: `12`)
+ * @param breakpoints The breakpoints to use in the grid. (default: `{xs: 300, s: 576, m: 768, l: 992, xl: 1200, xxl: 1400}`)
+ */
+export function generateGridSystem(divisionCount, breakpoints = defaultBreakPoints) {
+    let out = [];
+    out.push(generateColumns(breakpoints, divisionCount));
+    out.push(generateContainers(breakpoints, divisionCount));
+    return out;
+}
+function generateWithBreakpoints(selectorString, breakpoints, divisions) {
+    function generateSizes(index) {
+        let out = [];
+        for (let size in breakpoints) {
+            out.push([
+                media(`only screen and (max-width: ${breakpoints[size]}px)`, [
+                    selector(`${selectorString}-${size}-${index}`, [
+                        width({
+                            value: {
+                                unit: '%',
+                                value: 100 / (12 / index)
+                            }
+                        }),
+                    ])
+                ]),
+            ]);
+        }
+        return out;
+    }
+    let out = [];
+    for (let i = 1; i &lt;= divisions; i++) {
+        out.push([
+            generateSizes(i),
+            selector(`${selectorString}-${i}`, [
+                width({
+                    value: { unit: '%', value: 100 / (12 / i) },
+                })
+            ])
+        ]);
+    }
+    return out;
+}
+function generateColumns(breakpoints = defaultBreakPoints, divisions = 12) {
+    let out = [
+        selector(".col,[class^='col-'],[class^=' col-']", [
+            flex({ direction: 'column' }),
+            margin({ auto: true })
+        ])
+    ];
+    return out.concat(generateWithBreakpoints('.col', breakpoints, divisions));
+}
+function generateContainers(breakpoints = defaultBreakPoints, divisions = 12) {
+    let out = [
+        selector(".container,[class^='container-'],[class^=' container-']", [
+            flex({ direction: 'column' }),
+            margin({ auto: true })
+        ])
+    ];
+    return out.concat(generateWithBreakpoints('.container', breakpoints, divisions));
+}
+//
+//  Other generators
+//
+/**
+ * Generate color classes automatically. These classes will look like this: `.color-[color]`
+ * @param colors The object of colors to generate classes for. It should be noted that only a key:value pair of the RGB class is supported.
+ */
+export function generateColorClasses(colors) {
+    let out = [];
+    for (let color in colors) {
+        out.push(selector(`.color-${color}`, [
+            { color: colors[color] }
+        ]));
+    }
+    return out;
+}
+/**
+ * Generate Background Color classes automatically. These classes will look like this: `.bg-[color]`
+ * @param colors The object of colors to generate classes for. It should be noted that only a key:value pair of the RGB class is supported.
+ */
+export function generateBackgroundColorClasses(colors) {
+    let out = [];
+    for (let color in colors) {
+        out.push(selector(`.bg-${color}`, [
+            { 'background-color': colors[color] }
+        ]));
+    }
+    return out;
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="StyleSheet.html">StyleSheet</a></li></ul><h3>Global</h3><ul><li><a href="global.html#boxSizing">boxSizing</a></li><li><a href="global.html#compile">compile</a></li><li><a href="global.html#compilerLog">compilerLog</a></li><li><a href="global.html#content">content</a></li><li><a href="global.html#cursor">cursor</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#display">display</a></li><li><a href="global.html#errorCheckSheet">errorCheckSheet</a></li><li><a href="global.html#generateBackgroundColorClasses">generateBackgroundColorClasses</a></li><li><a href="global.html#generateColorClasses">generateColorClasses</a></li><li><a href="global.html#generateGridSystem">generateGridSystem</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#include">include</a></li><li><a href="global.html#loopStyles">loopStyles</a></li><li><a href="global.html#margin">margin</a></li><li><a href="global.html#media">media</a></li><li><a href="global.html#padding">padding</a></li><li><a href="global.html#selector">selector</a></li><li><a href="global.html#shadow">shadow</a></li><li><a href="global.html#width">width</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sun Oct 23 2022 16:50:33 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
