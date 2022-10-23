@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: stylesheet.js</title>
+    <title>JSDoc: Source: styles/grid.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: stylesheet.js</h1>
+    <h1 class="page-title">Source: styles/grid.js</h1>
 
     
 
@@ -26,15 +26,34 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * An AuraJS stylesheet. This can be used to create a new AuraJS stylesheet which in turn can be converted back to CSS.
+            <pre class="prettyprint source linenums"><code>import { ParameterError } from "../error.js";
+/**
+ * Create a grid layout.
+ * @param row Template row size
+ * @param column Template column size
+ * @param areas Template areas
+ * @param autoRows Auto row size
+ * @param autoColumns Auto column size
+ * @param autoFlow Auto flow
  */
-class StyleSheet {
-    constructor(styles) {
-        this.styles = styles;
-    }
+export function grid(opts) {
+    if (!opts)
+        throw new ParameterError();
+    let out = {};
+    if (opts.row)
+        out['grid-template-row'] = opts.row;
+    if (opts.column)
+        out['grid-template-column'] = opts.column;
+    if (opts.areas)
+        out['grid-template-areas'] = opts.areas;
+    if (opts.autoFlow)
+        out['grid-auto-flow'] = opts.autoFlow;
+    if (opts.autoRows)
+        out['grid-auto-rows'] = opts.autoRows;
+    if (opts.autoColumns)
+        out['grid-auto-columns'] = opts.autoColumns;
+    return out;
 }
-export default StyleSheet;
 </code></pre>
         </article>
     </section>

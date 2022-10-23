@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: stylesheet.js</title>
+    <title>JSDoc: Source: styles/color.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: stylesheet.js</h1>
+    <h1 class="page-title">Source: styles/color.js</h1>
 
     
 
@@ -26,15 +26,47 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * An AuraJS stylesheet. This can be used to create a new AuraJS stylesheet which in turn can be converted back to CSS.
+            <pre class="prettyprint source linenums"><code>import { Style } from "../baseclasses.js";
+/**
+ * A simple RGB color class. Allows for easy manipulation of colors.
  */
-class StyleSheet {
-    constructor(styles) {
-        this.styles = styles;
+export class RGB extends Style {
+    constructor(r, g, b) {
+        super();
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.r = r;
+        this.g = g;
+        this.b = b;
+    }
+    /**
+     * Create a string of the stored values, needed for CSS.
+     * @returns A string of the RGB color in the format 'rgb(r,g,b)'
+     */
+    toString() {
+        return `rgb(${this.r}, ${this.g}, ${this.b})`;
     }
 }
-export default StyleSheet;
+/**
+ * Apply a color to text.
+ * @param color A color to apply to text
+ */
+export function color(color) {
+    return { color };
+}
+/**
+ * Apply a color to the background
+ * @param color A color to apply to the background
+ */
+export function backgroundColor(color) {
+    return { "background-color": color.toString() };
+}
+export default {
+    RGB,
+    color,
+    backgroundColor
+};
 </code></pre>
         </article>
     </section>

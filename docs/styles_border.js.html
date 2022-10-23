@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: stylesheet.js</title>
+    <title>JSDoc: Source: styles/border.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: stylesheet.js</h1>
+    <h1 class="page-title">Source: styles/border.js</h1>
 
     
 
@@ -27,14 +27,81 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * An AuraJS stylesheet. This can be used to create a new AuraJS stylesheet which in turn can be converted back to CSS.
+ * Create a new Border.
+ * @param unit Unit of measurement (px,em,rem)
+ * @param width Border width
+ * @param style What kind of border? Solid, dashed, dotted
+ * @param color What color should the border be?
  */
-class StyleSheet {
-    constructor(styles) {
-        this.styles = styles;
-    }
+export function border(unit, width, style = 'solid', color) {
+    return { "border": `${width}${unit} ${style} ${color}` };
 }
-export default StyleSheet;
+/**
+ * Create a new Bottom Border.
+ * @param unit Unit of measurement (px,em,rem)
+ * @param width Border width
+ * @param style What kind of border? Solid, dashed, dotted
+ * @param color What color should the border be?
+ */
+export function borderBottom(unit, width, style = 'solid', color) {
+    return { "border-bottom": `${width}${unit} ${style} ${color}` };
+}
+/**
+ * Create a new Top Border.
+ * @param unit Unit of measurement (px,em,rem)
+ * @param width Border width
+ * @param style What kind of border? Solid, dashed, dotted
+ * @param color What color should the border be?
+*/
+export function borderTop(unit, width, style = 'solid', color) {
+    return { "border-top": `${width}${unit} ${style} ${color}` };
+}
+/**
+ * Create a new Left Border.
+ * @param unit Unit of measurement (px,em,rem)
+ * @param width Border width
+ * @param style What kind of border? Solid, dashed, dotted
+ * @param color What color should the border be?
+*/
+export function borderLeft(unit, width, style = 'solid', color) {
+    return { "border-left": `${width}${unit} ${style} ${color}` };
+}
+/**
+ * Create a new Right Border.
+ * @param unit Unit of measurement (px,em,rem)
+ * @param width Border width
+ * @param style What kind of border? Solid, dashed, dotted
+ * @param color What color should the border be?
+*/
+export function borderRight(unit, width, style = 'solid', color) {
+    return { "border-right": `${width}${unit} ${style} ${color}` };
+}
+/**
+ * Set whether table borders should collapse into a single border or be separated as in standard HTML.
+ * @param value The value of this property ('collapse' | 'separate' | 'inherit')
+ * @returns
+ */
+export function borderCollapse(value) {
+    return { 'border-collapse': value };
+}
+/**
+ * Set an image as border
+ * @param source The source of the image
+ * @param slice How should the image be sliced?
+ * @param width How wide the border image should be
+ * @param outset How far the border image should be from the border
+ * @param repeat Specify how/if the image should be repeated
+ */
+export function borderImage(source, slice, width, outset, repeat) {
+    return { 'border-image': `${source} ${slice} ${width} ${outset} ${repeat}` };
+}
+/**
+ * Apply a radius to the border
+ * @param radius Radius of the border
+ */
+export function borderRadius(unit, radius) {
+    return { "border-radius": `${radius}${unit}` };
+}
 </code></pre>
         </article>
     </section>

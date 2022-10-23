@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: stylesheet.js</title>
+    <title>JSDoc: Source: styles/list.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: stylesheet.js</h1>
+    <h1 class="page-title">Source: styles/list.js</h1>
 
     
 
@@ -27,14 +27,21 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * An AuraJS stylesheet. This can be used to create a new AuraJS stylesheet which in turn can be converted back to CSS.
+ * Define how List indicators should be displayed.
+ * @param {string} type The type of icon to use
+ * @param {string} position The position of the icon
+ * @param {string} image The image to use as the icon
  */
-class StyleSheet {
-    constructor(styles) {
-        this.styles = styles;
-    }
+export function listStyle(opts) {
+    let out = {};
+    if (opts.type)
+        out['list-style-type'] = opts.type;
+    if (opts.position)
+        out['list-style-position'] = opts.position;
+    if (opts.image)
+        out['list-style-image'] = opts.image;
+    return out;
 }
-export default StyleSheet;
 </code></pre>
         </article>
     </section>

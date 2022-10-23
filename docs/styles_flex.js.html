@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: stylesheet.js</title>
+    <title>JSDoc: Source: styles/flex.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: stylesheet.js</h1>
+    <h1 class="page-title">Source: styles/flex.js</h1>
 
     
 
@@ -27,14 +27,54 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * An AuraJS stylesheet. This can be used to create a new AuraJS stylesheet which in turn can be converted back to CSS.
+ * Set the flex-direction property.
+ * @param direction direction of the flex container
  */
-class StyleSheet {
-    constructor(styles) {
-        this.styles = styles;
-    }
+export function flexDirection(direction) {
+    return { "flex-direction": direction };
 }
-export default StyleSheet;
+/**
+ * Set how flex should handle wrapping.
+ * @param wrap Wrap option
+ */
+export function flexWrap(wrap) {
+    return { "flex-wrap": wrap };
+}
+/**
+ * Made an element a Flex element. With this you can set a bunch of flex properties in one go.
+ * @param direction The direction of the flex container
+ * @param wrap How the flex container should handle wrapping
+ * @param grow The flex-grow property
+ * @param shrink The flex-shrink property
+ * @param basis The flex-basis property
+ * @param alignContent How to align the content in the flex container
+ * @param justify How to justify the content in the flex container
+ * @param alignItems How to align the items in the flex container
+ */
+export function flex(opts) {
+    let out = { 'display': 'flex' };
+    if (opts.direction)
+        out['flex-direction'] = opts.direction;
+    if (opts.wrap)
+        out['flex-wrap'] = opts.wrap;
+    if (opts.grow)
+        out['flex-grow'] = opts.grow;
+    if (opts.shrink)
+        out['flex-shrink'] = opts.shrink;
+    if (opts.basis)
+        out['flex-basis'] = opts.basis;
+    if (opts.alignContent)
+        out['align-content'] = opts.alignContent;
+    if (opts.justify)
+        out['justify-content'] = opts.justify;
+    if (opts.alignItems)
+        out['align-items'] = opts.alignItems;
+    return out;
+}
+export default {
+    flexDirection,
+    flexWrap
+};
 </code></pre>
         </article>
     </section>

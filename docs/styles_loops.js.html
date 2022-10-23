@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: stylesheet.js</title>
+    <title>JSDoc: Source: styles/loops.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: stylesheet.js</h1>
+    <h1 class="page-title">Source: styles/loops.js</h1>
 
     
 
@@ -27,14 +27,54 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * An AuraJS stylesheet. This can be used to create a new AuraJS stylesheet which in turn can be converted back to CSS.
+ * Create a for loop to generate a list of styles.
+ * Note: To use the `selector` in a place where the value would be anything BUT a `string`, you must use the `loopResolve` function.
+ * ```
+ * loopCounter(0, 4, [
+ *    // A demo selector
+ *    selector('demo-&lt;#i>', [
+ *       margin({unit:'rem', top: loopResolve('&lt;#i>')}),
+ *    ])
+ * ])
+ * ````
+ * @param startvalue The start value of the loop
+ * @param endvalue The end value of the loop
+ * @param styles A collection of styles and/or selectors
+ * @param selector What string placeholder to use for the loop value. Defaults to `&lt;#i>`
  */
-class StyleSheet {
-    constructor(styles) {
-        this.styles = styles;
+export function loopCounter(startvalue, endvalue, styles, selector = '&lt;#i>') {
+    let out = [];
+    for (let index = startvalue; index &lt;= endvalue; index++) {
+        styles.forEach(style => {
+            let str = JSON.stringify(style);
+            let newstyle = JSON.parse(str);
+            if (style.selector) {
+                newstyle.selector = style.selector.replaceAll(selector, index);
+                newstyle.style = loopCounter(index, index, style.style, selector);
+            }
+            else {
+                Object.keys(newstyle).forEach(key => {
+                    if (typeof newstyle[key] == "string") {
+                        newstyle[key] = newstyle[key].replaceAll(selector, index);
+                    }
+                    else if (newstyle[key] instanceof Object) {
+                        newstyle[key] = newstyle[key].toString();
+                    }
+                });
+            }
+            out.push(newstyle);
+        });
     }
+    return out;
 }
-export default StyleSheet;
+/**
+ * loopResolve is used to resolve Loop selectors when a loop is executed.
+ * This is required to make use of the `selector` a loop will provide.
+ * @param value The value to resolve
+ */
+export function loopResolve(value) {
+    return value;
+}
 </code></pre>
         </article>
     </section>
