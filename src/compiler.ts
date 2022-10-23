@@ -110,9 +110,9 @@ function errorCheckSheet(styles:Array<any>,parent=undefined) {
             selectorFound = true;
             errorCheckSheet(style.style, style.selector);
         } else {
-            // if(selectorFound) {
-            //     throw new StyleError(style,parent);
-            // }
+            if(selectorFound) {
+                throw new StyleError(style,parent);
+            }
         }
         
     });
