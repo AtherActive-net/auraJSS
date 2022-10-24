@@ -167,7 +167,7 @@ export function width(opts:Partial<WidthHeight>) {
     let out = {};
     if(opts.min) out['min-width'] = `${opts.min.v}${opts.min.u}`;
     if(opts.max) out['max-width'] = `${opts.max.v}${opts.max.u}`;
-    if(opts.value) out['width'] = `${opts.value.v}${opts.value.u}`;
+    if(opts.current) out['width'] = `${opts.current.v}${opts.current.u}`;
     return out;
 }
 
@@ -181,7 +181,7 @@ export function height(opts:Partial<WidthHeight>) {
     let out = {};
     if(opts.min) out['min-height'] = `${opts.min.v}${opts.min.u}`;
     if(opts.max) out['max-height'] = `${opts.max.v}${opts.max.u}`;
-    if(opts.value) out['height'] = `${opts.value.v}${opts.value.u}`;
+    if(opts.current) out['height'] = `${opts.current.v}${opts.current.u}`;
     return out;
 }
 

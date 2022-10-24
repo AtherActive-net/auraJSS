@@ -18,7 +18,7 @@ export interface UnitValue {
 export interface WidthHeight {
     min?: UnitValue,
     max?: UnitValue,
-    value?: UnitValue,
+    current?: UnitValue,
 }
 
 export interface CompilerOptions {
