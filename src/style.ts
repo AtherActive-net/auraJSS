@@ -12,6 +12,8 @@ import { RGB, color, backgroundColor } from "./styles/color.js"
 import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize} from "./styles/background.js"
 import { position, top,left,right,bottom,zIndex } from "./styles/position.js"
 import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js"
+import {transform, translate, rotate, rotate3D, skew, scale} from "./styles/transform.js"
+import { animation, keyframe, createAnimation } from "styles/animation.js"
 import { flex } from "./styles/flex.js"
 import { font } from "./styles/font.js"
 import { grid } from "./styles/grid.js"
@@ -69,7 +71,20 @@ export {
     grid,
 
     // List
-    listStyle
+    listStyle,
+
+    // Transform
+    transform,
+    translate,
+    rotate,
+    rotate3D,
+    skew,
+    scale,
+
+    // Animation
+    animation,
+    keyframe,
+    createAnimation
 }
 
 /**
