@@ -11,8 +11,8 @@ export interface PaddingMargin {
 }
 
 export interface UnitValue {
-    unit: unit,
-    value: number
+    u: unit,
+    v: number
 }
 
 export interface WidthHeight {

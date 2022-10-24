@@ -14,9 +14,9 @@ import { Animation } from "../interfaces.js";
 export function animation(opts:Partial<Animation>) {
     let out = {};
     if(opts.name) out['animation-name'] = `'${opts.name}'`;
-    if(opts.duration) out['animation-duration'] = `${opts.duration.value}${opts.duration.unit}`;
+    if(opts.duration) out['animation-duration'] = `${opts.duration.v}${opts.duration.u}`;
     if(opts.timing) out['animation-timing-function'] = opts.timing;
-    if(opts.delay) out['animation-delay'] = `${opts.delay.value}${opts.delay.unit}`;
+    if(opts.delay) out['animation-delay'] = `${opts.delay.v}${opts.delay.u}`;
     if(opts.iteration) out['animation-iteration-count'] = opts.iteration;
     if(opts.direction) out['animation-direction'] = opts.direction;
     if(opts.fillMode) out['animation-fill-mode'] = opts.fillMode;

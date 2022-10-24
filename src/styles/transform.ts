@@ -16,8 +16,8 @@ export function transform(transformFunction:Object) {
  * @param z The z-axis translation. If left blank it will create a 2D translate.
  */
 export function translate(x:UnitValue, y:UnitValue, z?:UnitValue) {
-    if(z) return `translate3d(${x.value}${x.unit}, ${y.value}${y.unit}, ${z.value}${z.unit})`
-    return `translate(${x.value}${x.unit}, ${y.value}${y.unit})`
+    if(z) return `translate3d(${x.v}${x.v}, ${y.v}${y.v}, ${z.v}${z.v})`
+    return `translate(${x.v}${x.v}, ${y.v}${y.v})`
 }
 
 /**
@@ -38,7 +38,7 @@ export function scale(x:number, y:number, z?:number) {
  * @param angle The angle of rotation
  */
 export function rotate(angle:UnitValue) {
-    return `rotate(${angle.value}${angle.unit})`
+    return `rotate(${angle.v}${angle.v})`
 }
 
 /**
@@ -61,5 +61,5 @@ export function rotate3D(x:number, y:number, z:number, angle:UnitValue) {
  * @param y The y-axis skew
  */
 export function skew(x:UnitValue, y:UnitValue) {
-    return `skew(${x.value}${x.unit}, ${y.value}${y.unit})`
+    return `skew(${x.v}${x.v}, ${y.v}${y.v})`
 }

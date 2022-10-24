@@ -165,9 +165,9 @@ export function padding(opts:Partial<PaddingMargin>) {
  */
 export function width(opts:Partial<WidthHeight>) {
     let out = {};
-    if(opts.min) out['min-width'] = `${opts.min.value}${opts.min.unit}`;
-    if(opts.max) out['max-width'] = `${opts.max.value}${opts.max.unit}`;
-    if(opts.value) out['width'] = `${opts.value.value}${opts.value.unit}`;
+    if(opts.min) out['min-width'] = `${opts.min.v}${opts.min.u}`;
+    if(opts.max) out['max-width'] = `${opts.max.v}${opts.max.u}`;
+    if(opts.value) out['width'] = `${opts.value.v}${opts.value.u}`;
     return out;
 }
 
@@ -179,9 +179,9 @@ export function width(opts:Partial<WidthHeight>) {
  */
 export function height(opts:Partial<WidthHeight>) {
     let out = {};
-    if(opts.min) out['min-height'] = `${opts.min.value}${opts.min.unit}`;
-    if(opts.max) out['max-height'] = `${opts.max.value}${opts.max.unit}`;
-    if(opts.value) out['height'] = `${opts.value.value}${opts.value.unit}`;
+    if(opts.min) out['min-height'] = `${opts.min.v}${opts.min.u}`;
+    if(opts.max) out['max-height'] = `${opts.max.v}${opts.max.u}`;
+    if(opts.value) out['height'] = `${opts.value.v}${opts.value.u}`;
     return out;
 }
 
