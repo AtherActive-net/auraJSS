@@ -26,7 +26,7 @@ export async function compile(opts:CompilerOptions={input:undefined}) {
     if(!opts.silent) compilerLog(`Starting compilation of '${opts.input}'`);
 
     // Check if there are any obvious errors in the stylesheet.
-    errorCheckSheet(styleSheet.styles);
+    // errorCheckSheet(styleSheet.styles);
 
     // Loop over all styles and generate CSS, then write it to a file.
     const css = loopStyles(styleSheet.styles);
