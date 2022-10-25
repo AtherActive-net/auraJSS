@@ -1,4 +1,4 @@
-import { PaddingMargin, UnitValue, WidthHeight } from "./interfaces.js"
+import { PaddingMargin, UnitValue, UnitValueGrid, WidthHeight } from "./interfaces.js"
 import { ParameterError } from "./error.js"
 
 // Basic exports
@@ -13,10 +13,10 @@ import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImag
 import { position, top,left,right,bottom,zIndex } from "./styles/position.js"
 import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js"
 import {transform, translate, rotate, rotate3D, skew, scale} from "./styles/transform.js"
-import { animation, keyframe, createAnimation } from "styles/animation.js"
+import { animation, keyframe, createAnimation } from "./styles/animation.js"
 import { flex } from "./styles/flex.js"
 import { font } from "./styles/font.js"
-import { grid } from "./styles/grid.js"
+import { gridTemplate, gridColumn, gridGap, gridRow } from "./styles/grid.js"
 import { listStyle } from "./styles/list.js"
 
 export {
@@ -28,6 +28,8 @@ export {
     // other
     unit,
     include,
+    UnitValueGrid,
+    UnitValue,
     
     // Color
     RGB,
@@ -68,7 +70,11 @@ export {
     font,
 
     // grid
-    grid,
+    gridTemplate,
+    gridColumn,
+    gridGap,
+    gridRow,
+
 
     // List
     listStyle,
@@ -119,7 +125,7 @@ export function media(query:string, styles:Array<Object>) {
  * CSS Display property
  * @param opt Display option
  */
-export function display(opt:'flex' | 'inline-flex' | 'block' | 'inline-block' | 'inline' | 'none') {
+export function display(opt:'flex' | 'inline-flex' | 'block' | 'inline-block' | 'inline' | 'none'| 'grid' | 'inline-grid') {
     return {display: opt}
 }
 

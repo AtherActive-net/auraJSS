@@ -1,5 +1,5 @@
 import { Stylesheet } from "./style.js"
-import { unit } from "./util.js"
+import { unit, unitGrid } from "./util.js"
 
 export interface PaddingMargin {
     unit:'px'|'em'|'rem',
@@ -13,6 +13,11 @@ export interface PaddingMargin {
 export interface UnitValue {
     u: unit,
     v: number
+}
+
+export interface UnitValueGrid{
+    v: number,
+    u: unitGrid,
 }
 
 export interface WidthHeight {
@@ -77,4 +82,19 @@ export interface Keyframe {
     from?: Object,
     to?: Object,
     percent?: number,
+}
+
+export interface GridTemplate {
+    rows?: Array<string|UnitValueGrid|number>,
+    columns?: Array<string|UnitValueGrid|number>,
+}
+
+export interface GridStartEnd {
+    start?: number|'auto',
+    end?: number|'auto'
+}
+
+export interface GridGap {
+    row?: UnitValue,
+    column?: UnitValue,
 }
