@@ -131,36 +131,42 @@ export function display(opt:'flex' | 'inline-flex' | 'block' | 'inline-block' | 
 
 /**
  * Apply padding to an element.
- * @param unit Unit of measurement (default: `px`)
  * @param top Top padding (default: `0`)
  * @param right Right padding (default: `0`)
  * @param bottom Bottom padding (default: `0`)
  * @param left Left padding (default: `0`)
+ * @param all Apply the same padding to all sides
  * @param auto Auto padding. Overrides other parameters (default: `false`)
  */
 export function padding(opts:Partial<PaddingMargin>) {
+    if(!opts) throw new ParameterError()
     if(opts.auto) {
-        return {padding: 'auto'}
+        return {"padding": `auto`}
     }
-    return {"padding": `${opts.top|0}${opts.unit} ${opts.right|0}${opts.unit} ${opts.bottom|0}${opts.unit} ${opts.left|0}${opts.unit}`}
+    if(opts.all) {
+        return {"padding": `${opts.all.v}${opts.all.u}`}
+    }
+    return {"padding": `${opts.top.v|0}${opts.top.u} ${opts.right.v|0}${opts.right.u} ${opts.bottom.v|0}${opts.bottom.u} ${opts.left.v|0}${opts.left.u}`}
 }
 
 /**
  * Apply margin to an element.
- * @param unit Unit of measurement (default: `px`)
  * @param top Top margin (default: `0`)
  * @param right Right margin (default: `0`)
  * @param bottom Bottom margin (default: `0`)
  * @param left Left margin (default: `0`)
+ * @param all Apply the same margin to all sides
  * @param auto Auto margin. Overrides other parameters (default: `false`)
  */
- export function margin(opts:Partial<PaddingMargin>={unit:'px', top:0, right:0, bottom:0, left:0, auto:false}) {
+export function margin(opts:Partial<PaddingMargin>) {
     if(!opts) throw new ParameterError()
-    if(!opts.unit) opts.unit = 'px'
     if(opts.auto) {
         return {"margin": `auto`}
     }
-    return {"margin": `${opts.top|0}${opts.unit} ${opts.right|0}${opts.unit} ${opts.bottom|0}${opts.unit} ${opts.left|0}${opts.unit}`}
+    if(opts.all) {
+        return {"margin": `${opts.all.v}${opts.all.u}`}
+    }
+    return {"margin": `${opts.top.v|0}${opts.top.u} ${opts.right.v|0}${opts.right.u} ${opts.bottom.v|0}${opts.bottom.u} ${opts.left.v|0}${opts.left.u}`}
 }
 
 /**
