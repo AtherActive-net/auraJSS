@@ -1,7 +1,8 @@
 import { GridGap, GridStartEnd, GridTemplate, UnitValueGrid } from "../interfaces.js";
 
 /**
- * Define a grid template. All options can contain `string`, `unitValueGrid` or `number`(which defaults to `px`).
+ * Define a grid template. All options can contain `string`, `unitValueGrid` or `number`(which defaults to `px`). This also automatically
+ * sets display to `grid`.
  * @param colums Column template array.
  * @param rows Row template array.
  */
