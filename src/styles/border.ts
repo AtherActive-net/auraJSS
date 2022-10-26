@@ -1,58 +1,54 @@
+import { UnitValue } from "interfaces.js";
 import { unit } from "../util.js";
 import { RGB } from "./color";
 /**
  * Create a new Border.
- * @param unit Unit of measurement (px,em,rem)
- * @param width Border width
+ * @param value Border width
  * @param style What kind of border? Solid, dashed, dotted
  * @param color What color should the border be?
  */
- export function border(unit:unit,width: number, style: 'solid' | 'dashed' | 'dotted'='solid', color?: RGB) {
-    return { "border": `${width}${unit} ${style} ${color}` };
+ export function border(value:UnitValue, style: 'solid' | 'dashed' | 'dotted'='solid', color?: RGB) {
+    return { "border": `${value.v}${value.u} ${style} ${color}` };
 }
 
 /**
  * Create a new Bottom Border.
- * @param unit Unit of measurement (px,em,rem)
- * @param width Border width
+ * @param value Border width
  * @param style What kind of border? Solid, dashed, dotted
  * @param color What color should the border be?
  */
-export function borderBottom(unit:unit,width: number, style: 'solid' | 'dashed' | 'dotted'='solid', color?: RGB) {
-    return { "border-bottom": `${width}${unit} ${style} ${color}` };
+export function borderBottom(value:UnitValue, style: 'solid' | 'dashed' | 'dotted'='solid', color?: RGB) {
+    return { "border-bottom": `${value.v}${value.u} ${style} ${color}` };
 }
 
 /**
  * Create a new Top Border.
- * @param unit Unit of measurement (px,em,rem)
- * @param width Border width
+ * @param value Border width
  * @param style What kind of border? Solid, dashed, dotted
  * @param color What color should the border be?
 */
-export function borderTop(unit:unit,width: number, style: 'solid' | 'dashed' | 'dotted'='solid', color?: RGB) {
-    return { "border-top": `${width}${unit} ${style} ${color}` };
+export function borderTop(value:UnitValue, style: 'solid' | 'dashed' | 'dotted'='solid', color?: RGB) {
+    return { "border-top": `${value.v}${value.u} ${style} ${color}` };
 }
 
 /**
  * Create a new Left Border.
- * @param unit Unit of measurement (px,em,rem)
- * @param width Border width
+ * @param value Border width
  * @param style What kind of border? Solid, dashed, dotted
  * @param color What color should the border be?
 */
-export function borderLeft(unit:unit,width: number, style: 'solid' | 'dashed' | 'dotted'='solid', color?: RGB) {
-    return { "border-left": `${width}${unit} ${style} ${color}` };
+export function borderLeft(value:UnitValue, style: 'solid' | 'dashed' | 'dotted'='solid', color?: RGB) {
+    return { "border-left": `${value.v}${value.u} ${style} ${color}` };
 }
 
 /**
  * Create a new Right Border.
- * @param unit Unit of measurement (px,em,rem)
- * @param width Border width
+ * @param value Border width
  * @param style What kind of border? Solid, dashed, dotted
  * @param color What color should the border be?
 */
-export function borderRight(unit:unit,width: number, style: 'solid' | 'dashed' | 'dotted'='solid', color?: RGB) {
-    return { "border-right": `${width}${unit} ${style} ${color}` };
+export function borderRight(value:UnitValue, style: 'solid' | 'dashed' | 'dotted'='solid', color?: RGB) {
+    return { "border-right": `${value.v}${value.u} ${style} ${color}` };
 }
 
 /**
@@ -80,6 +76,6 @@ export function borderImage(source?:string, slice?:number, width?:number, outset
  * Apply a radius to the border
  * @param radius Radius of the border
  */
- export function borderRadius(unit: unit,radius: number) {
-    return { "border-radius": `${radius}${unit}` };
+ export function borderRadius(value:UnitValue) {
+    return { "border-radius": `${value.v}${value.u}` };
 }
