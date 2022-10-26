@@ -2,11 +2,11 @@ import { Stylesheet } from "./style.js"
 import { unit, unitGrid } from "./util.js"
 
 export interface PaddingMargin {
-    unit:'px'|'em'|'rem',
-    top:number, 
-    right:number, 
-    bottom:number, 
-    left:number,
+    top:UnitValue,
+    right:UnitValue,
+    bottom:UnitValue,
+    left:UnitValue,
+    all:UnitValue,
     auto:boolean
 }
 
