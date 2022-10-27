@@ -13,7 +13,7 @@ import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImag
 import { position, top,left,right,bottom,zIndex } from "./styles/position.js"
 import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js"
 import {transform, translate, rotate, rotate3D, skew, scale} from "./styles/transform.js"
-import { animation, keyframe, createAnimation } from "./styles/animation.js"
+import { animation, keyframe, createAnimation, transition } from "./styles/animation.js"
 import { gridTemplate, gridColumn, gridGap, gridRow } from "./styles/grid.js"
 import { flex } from "./styles/flex.js"
 import { font } from "./styles/font.js"
@@ -100,7 +100,8 @@ export {
     // Animation
     animation,
     keyframe,
-    createAnimation
+    createAnimation,
+    transition
 }
 
 /**

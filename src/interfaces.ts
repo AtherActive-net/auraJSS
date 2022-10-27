@@ -98,3 +98,10 @@ export interface GridGap {
     row?: UnitValue,
     column?: UnitValue,
 }
+
+export interface Transition {
+    props:string|Array<String>,
+    duration:UnitValue,
+    timing?:'linear'|'ease'|'ease-in'|'ease-out'|'ease-in-out'|'step-start'|'step-end',
+    delay?:UnitValue,
+}
