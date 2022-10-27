@@ -47,7 +47,8 @@ export async function compile(opts:CompilerOptions={input:undefined}) {
 function loopStyles(styles:Array<any>, parent?:string) {
     let css = '';
     let closed = false;
-    styles.forEach(async (style) => {
+    styles.forEach((style) => {
+        let addedCSS = '';
         if(style.selector) {
             if (parent) {
                 if(style.selector.startsWith('&')) {
@@ -55,46 +56,47 @@ function loopStyles(styles:Array<any>, parent?:string) {
                 } else {
                     style.selector = `${parent} ${style.selector}`;
                 }
-                css += '}'
+                addedCSS += '}'
                 closed = true;
             }
-            css += `${style.selector} {`;
-            css += loopStyles(style.style, style.selector);
-            if(!closed) css += '}';
+            addedCSS += `${style.selector} {`;
+            addedCSS += loopStyles(style.style, style.selector);
+            if(!closed) addedCSS += '}';
         } 
         // If it is an import, add the styles
         else if(style.include) {
-            css += loopStyles(style.include.styles, parent);
+            addedCSS += loopStyles(style.include.styles, parent);
         }
         // Media queries need to be handled separately
         else if(style.media) {
-            css += `@media ${style.media} {`;
-            css += loopStyles(style.styles, parent);
-            css += '}';
+            addedCSS += `@media ${style.media} {`;
+            addedCSS += loopStyles(style.styles, parent);
+            addedCSS += '}';
         }
         else if(style.name) {
             // now it is a CSS animation
-            css += `@keyframes ${style.name} {`;
-            css += loopStyles(style.keyframes, parent);
-            css += '}';
+            addedCSS += `@keyframes ${style.name} {`;
+            addedCSS += loopStyles(style.keyframes, parent);
+            addedCSS += '}';
         }
         else if(style.percent !== undefined) {
-            css += `${style.percent}% {`;
-            css += loopStyles(style.styles, parent);
-            css += '}';
+            addedCSS += `${style.percent}% {`;
+            addedCSS += loopStyles(style.styles, parent);
+            addedCSS += '}';
         }
         // If it is an array of styles, loop over them
         else if(style instanceof Array<any>) {
-            css += loopStyles(style, parent);
+            addedCSS += loopStyles(style, parent);
         }
         // If it is none of the above, it is a style.
         else {
-            css += Object.keys(style).map((key,i) => {
+            addedCSS += Object.keys(style).map((key,i) => {
                 return `${key}: ${Object.values(style)[i]};`
             }).join('');
 
 
         }
+        css += addedCSS;
     })
     return css
 }
