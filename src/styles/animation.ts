@@ -10,10 +10,10 @@ import { Animation, Transition } from "../interfaces.js";
  * @param {string} direction The direction of the animation
  * @param {string} fillMode The fill mode of the animation
  * @param {string} playState The play state of the animation
- */
+*/
 export function animation(opts:Partial<Animation>) {
     let out = {};
-    if(opts.name) out['animation-name'] = `'${opts.name}'`;
+    if(opts.name) out['animation-name'] = opts.name;
     if(opts.duration) out['animation-duration'] = `${opts.duration.v}${opts.duration.u}`;
     if(opts.timing) out['animation-timing-function'] = opts.timing;
     if(opts.delay) out['animation-delay'] = `${opts.delay.v}${opts.delay.u}`;
