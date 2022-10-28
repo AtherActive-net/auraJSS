@@ -29,7 +29,7 @@ export function px(value:number): UnitValue {
 }
 
 /**
- * Create a UnitValue object with the unit of `rem`.
+ * Create a UnitValue object with the unit of `em`.
  * @param value The value that should be paired with the unit
  */
 export function em(value:number): UnitValue {
@@ -37,7 +37,7 @@ export function em(value:number): UnitValue {
 }
 
 /**
- * Create a UnitValue object with the unit of `rem`.
+ * Create a UnitValue object with the unit of `vh`.
  * @param value The value that should be paired with the unit
  */
 export function vh(value:number): UnitValue {
@@ -45,7 +45,7 @@ export function vh(value:number): UnitValue {
 }
 
 /**
- * Create a UnitValue object with the unit of `rem`.
+ * Create a UnitValue object with the unit of `vw`.
  * @param value The value that should be paired with the unit
  */
 export function vw(value:number): UnitValue {
@@ -53,7 +53,7 @@ export function vw(value:number): UnitValue {
 }
 
 /**
- * Create a UnitValue object with the unit of `rem`.
+ * Create a UnitValue object with the unit of `vmin`.
  * @param value The value that should be paired with the unit
  */
 export function vmin(value:number): UnitValue {
@@ -61,7 +61,7 @@ export function vmin(value:number): UnitValue {
 }
 
 /**
- * Create a UnitValue object with the unit of `rem`.a
+ * Create a UnitValue object with the unit of `vmax`.a
  * @param value The value that should be paired with the unit
  */
 export function vmax(value:number): UnitValue {
@@ -69,7 +69,7 @@ export function vmax(value:number): UnitValue {
 }
 
 /**
- * Create a UnitValue object with the unit of `rem`.
+ * Create a UnitValue object with the unit of `%`.
  * @param value The value that should be paired with the unit
  */
 export function percent(value:number): UnitValue {
@@ -77,7 +77,7 @@ export function percent(value:number): UnitValue {
 }
 
 /**
- * Create a UnitValue object with the unit of `rem`.
+ * Create a UnitValue object with the unit of `s`.
  * @param value The value that should be paired with the unit
  */
 export function s(value:number): UnitValue {
@@ -85,7 +85,7 @@ export function s(value:number): UnitValue {
 }
 
 /**
- * Create a UnitValue object with the unit of `rem`.
+ * Create a UnitValue object with the unit of `fr`.
  * @param value The value that should be paired with the unit
  */
 export function fr(value:number): UnitValueGrid {
