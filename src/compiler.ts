@@ -34,9 +34,12 @@ export async function compile(opts:CompilerOptions={input:undefined}) {
         if(!opts.silent) compilerLog(`Writing compiled CSS to '${opts.outpath}'`);
         fs.writeFileSync(opts.outpath, css);
     }
-    if(!opts.silent) compilerLog(`Finished compilation of '${opts.input}'`);
+    if(!opts.silent) compilerLog(`Finished compilation of '${opts.input}'\n`);
+
+
     return css;
 }
+
 
 /**
  * Loop over all styles, including nested ones.
