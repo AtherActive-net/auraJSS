@@ -252,3 +252,11 @@ export function cursor(value:'auto' | 'default' | 'none' | 'context-menu' | 'hel
 export function direction(value:'ltr' | 'rtl') {
     return {'direction': value}
 }
+
+/**
+ * Set the opacity of an element
+ * @param value The opacity value
+ */
+export function opacity(value:number) {
+    return {'opacity': value}
+}
