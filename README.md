@@ -54,7 +54,7 @@ const sheet = new Stylesheet{[
 
 compile({
     input: sheet,
-    output: './aurajss.css'
+    outpath: './aurajss.css',
 });
 ```
 Now, if you run your script, it will start compiling the Stylesheet into CSS and (if everything goes correct) a new file will be created with the name present in `output`. You can disable writing to file by not providing an `output` path.
