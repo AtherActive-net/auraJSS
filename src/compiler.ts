@@ -112,7 +112,7 @@ function errorCheckSheet(styles:Array<any>,parent=undefined) {
             selectorFound = true;
             errorCheckSheet(style.style, style.selector);
         } else {
-            if(style instanceof Array) return;
+            if(style instanceof Array || style.name != undefined) return;
             if(selectorFound) {
                 throw new StyleError(style,parent);
             }
