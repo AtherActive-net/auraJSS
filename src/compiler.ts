@@ -1,6 +1,6 @@
 import { StyleError, CompileError } from './error.js';
 import fs from 'fs';
-import { CompilerOptions } from 'interfaces.js';
+import { CompilerOptions } from './interfaces.js';
 
 /**
  * Compile AuraJS stylesheets into CSS
