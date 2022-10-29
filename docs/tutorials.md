@@ -29,7 +29,7 @@ function loopDemo() {
         out.push([
             selector(`.loop-${i}`,[
                 padding({
-                    value: {unit:'px', value: i}
+                    value: px(i)
                 })
             ])
         ])

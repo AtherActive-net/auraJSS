@@ -32,18 +32,20 @@ import { compile } from "./compiler.js";
 import Stylesheet from "./stylesheet.js";
 import * as builtin from "./builtin.js";
 // Styles imported from the /styles folder
-import { include } from "./util.js";
+import { include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr } from "./util.js";
 import { RGB, color, backgroundColor } from "./styles/color.js";
 import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize } from "./styles/background.js";
 import { position, top, left, right, bottom, zIndex } from "./styles/position.js";
 import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js";
+import { transform, translate, rotate, rotate3D, skew, scale } from "./styles/transform.js";
+import { animation, keyframe, createAnimation, transition } from "./styles/animation.js";
+import { gridTemplate, gridColumn, gridGap, gridRow } from "./styles/grid.js";
 import { flex } from "./styles/flex.js";
 import { font } from "./styles/font.js";
-import { grid } from "./styles/grid.js";
 import { listStyle } from "./styles/list.js";
 export { 
 // basic
-Stylesheet, compile, builtin, include, 
+Stylesheet, compile, builtin, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr, 
 // Color
 RGB, color, backgroundColor, 
 // Background
@@ -57,9 +59,13 @@ flex,
 // Font
 font, 
 // grid
-grid, 
+gridTemplate, gridColumn, gridGap, gridRow, 
 // List
-listStyle };
+listStyle, 
+// Transform
+transform, translate, rotate, rotate3D, skew, scale, 
+// Animation
+animation, keyframe, createAnimation, transition };
 /**
  * A selector to select a CSS class.
  * @param selector CSS selector. You can use `&amp;` to apply something to the current selector.
@@ -95,37 +101,43 @@ export function display(opt) {
 }
 /**
  * Apply padding to an element.
- * @param unit Unit of measurement (default: `px`)
  * @param top Top padding (default: `0`)
  * @param right Right padding (default: `0`)
  * @param bottom Bottom padding (default: `0`)
  * @param left Left padding (default: `0`)
+ * @param all Apply the same padding to all sides
  * @param auto Auto padding. Overrides other parameters (default: `false`)
  */
 export function padding(opts) {
+    if (!opts)
+        throw new ParameterError();
     if (opts.auto) {
-        return { padding: 'auto' };
+        return { "padding": `auto` };
     }
-    return { "padding": `${opts.top | 0}${opts.unit} ${opts.right | 0}${opts.unit} ${opts.bottom | 0}${opts.unit} ${opts.left | 0}${opts.unit}` };
+    if (opts.all) {
+        return { "padding": `${opts.all.v}${opts.all.u}` };
+    }
+    return { "padding": `${opts.top.v | 0}${opts.top.u} ${opts.right.v | 0}${opts.right.u} ${opts.bottom.v | 0}${opts.bottom.u} ${opts.left.v | 0}${opts.left.u}` };
 }
 /**
  * Apply margin to an element.
- * @param unit Unit of measurement (default: `px`)
  * @param top Top margin (default: `0`)
  * @param right Right margin (default: `0`)
  * @param bottom Bottom margin (default: `0`)
  * @param left Left margin (default: `0`)
+ * @param all Apply the same margin to all sides
  * @param auto Auto margin. Overrides other parameters (default: `false`)
  */
-export function margin(opts = { unit: 'px', top: 0, right: 0, bottom: 0, left: 0, auto: false }) {
+export function margin(opts) {
     if (!opts)
         throw new ParameterError();
-    if (!opts.unit)
-        opts.unit = 'px';
     if (opts.auto) {
         return { "margin": `auto` };
     }
-    return { "margin": `${opts.top | 0}${opts.unit} ${opts.right | 0}${opts.unit} ${opts.bottom | 0}${opts.unit} ${opts.left | 0}${opts.unit}` };
+    if (opts.all) {
+        return { "margin": `${opts.all.v}${opts.all.u}` };
+    }
+    return { "margin": `${opts.top.v | 0}${opts.top.u} ${opts.right.v | 0}${opts.right.u} ${opts.bottom.v | 0}${opts.bottom.u} ${opts.left.v | 0}${opts.left.u}` };
 }
 /**
  * Set an elements Width. You can set the current, minimum, and maximum width.
@@ -136,11 +148,11 @@ export function margin(opts = { unit: 'px', top: 0, right: 0, bottom: 0, left: 0
 export function width(opts) {
     let out = {};
     if (opts.min)
-        out['min-width'] = `${opts.min.value}${opts.min.unit}`;
+        out['min-width'] = `${opts.min.v}${opts.min.u}`;
     if (opts.max)
-        out['max-width'] = `${opts.max.value}${opts.max.unit}`;
-    if (opts.value)
-        out['width'] = `${opts.value.value}${opts.value.unit}`;
+        out['max-width'] = `${opts.max.v}${opts.max.u}`;
+    if (opts.current)
+        out['width'] = `${opts.current.v}${opts.current.u}`;
     return out;
 }
 /**
@@ -152,11 +164,11 @@ export function width(opts) {
 export function height(opts) {
     let out = {};
     if (opts.min)
-        out['min-height'] = `${opts.min.value}${opts.min.unit}`;
+        out['min-height'] = `${opts.min.v}${opts.min.u}`;
     if (opts.max)
-        out['max-height'] = `${opts.max.value}${opts.max.unit}`;
-    if (opts.value)
-        out['height'] = `${opts.value.value}${opts.value.unit}`;
+        out['max-height'] = `${opts.max.v}${opts.max.u}`;
+    if (opts.current)
+        out['height'] = `${opts.current.v}${opts.current.u}`;
     return out;
 }
 /**
@@ -199,6 +211,13 @@ export function cursor(value) {
 export function direction(value) {
     return { 'direction': value };
 }
+/**
+ * Set the opacity of an element
+ * @param value The opacity value
+ */
+export function opacity(value) {
+    return { 'opacity': value };
+}
 </code></pre>
         </article>
     </section>
@@ -209,13 +228,13 @@ export function direction(value) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="RGB.html">RGB</a></li><li><a href="StyleSheet.html">StyleSheet</a></li></ul><h3>Global</h3><ul><li><a href="global.html#animation">animation</a></li><li><a href="global.html#backgrondPosition">backgrondPosition</a></li><li><a href="global.html#backgroundAttachment">backgroundAttachment</a></li><li><a href="global.html#backgroundClip">backgroundClip</a></li><li><a href="global.html#backgroundColor">backgroundColor</a></li><li><a href="global.html#backgroundImage">backgroundImage</a></li><li><a href="global.html#backgroundOrigin">backgroundOrigin</a></li><li><a href="global.html#backgroundRepeat">backgroundRepeat</a></li><li><a href="global.html#backgroundSize">backgroundSize</a></li><li><a href="global.html#border">border</a></li><li><a href="global.html#borderBottom">borderBottom</a></li><li><a href="global.html#borderCollapse">borderCollapse</a></li><li><a href="global.html#borderImage">borderImage</a></li><li><a href="global.html#borderLeft">borderLeft</a></li><li><a href="global.html#borderRadius">borderRadius</a></li><li><a href="global.html#borderRight">borderRight</a></li><li><a href="global.html#borderTop">borderTop</a></li><li><a href="global.html#boxSizing">boxSizing</a></li><li><a href="global.html#color">color</a></li><li><a href="global.html#compile">compile</a></li><li><a href="global.html#compilerLog">compilerLog</a></li><li><a href="global.html#content">content</a></li><li><a href="global.html#createAnimation">createAnimation</a></li><li><a href="global.html#cursor">cursor</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#display">display</a></li><li><a href="global.html#errorCheckSheet">errorCheckSheet</a></li><li><a href="global.html#flex">flex</a></li><li><a href="global.html#flexDirection">flexDirection</a></li><li><a href="global.html#flexWrap">flexWrap</a></li><li><a href="global.html#generateBackgroundColorClasses">generateBackgroundColorClasses</a></li><li><a href="global.html#generateColorClasses">generateColorClasses</a></li><li><a href="global.html#generateGridSystem">generateGridSystem</a></li><li><a href="global.html#grid">grid</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#include">include</a></li><li><a href="global.html#keyframe">keyframe</a></li><li><a href="global.html#listStyle">listStyle</a></li><li><a href="global.html#loopCounter">loopCounter</a></li><li><a href="global.html#loopResolve">loopResolve</a></li><li><a href="global.html#loopStyles">loopStyles</a></li><li><a href="global.html#margin">margin</a></li><li><a href="global.html#media">media</a></li><li><a href="global.html#padding">padding</a></li><li><a href="global.html#selector">selector</a></li><li><a href="global.html#shadow">shadow</a></li><li><a href="global.html#width">width</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="StyleSheet.html">StyleSheet</a></li></ul><h3>Global</h3><ul><li><a href="global.html#boxSizing">boxSizing</a></li><li><a href="global.html#compile">compile</a></li><li><a href="global.html#compilerLog">compilerLog</a></li><li><a href="global.html#content">content</a></li><li><a href="global.html#cursor">cursor</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#display">display</a></li><li><a href="global.html#em">em</a></li><li><a href="global.html#errorCheckSheet">errorCheckSheet</a></li><li><a href="global.html#fr">fr</a></li><li><a href="global.html#generateBackgroundColorClasses">generateBackgroundColorClasses</a></li><li><a href="global.html#generateColorClasses">generateColorClasses</a></li><li><a href="global.html#generateGridSystem">generateGridSystem</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#include">include</a></li><li><a href="global.html#loopStyles">loopStyles</a></li><li><a href="global.html#margin">margin</a></li><li><a href="global.html#media">media</a></li><li><a href="global.html#opacity">opacity</a></li><li><a href="global.html#padding">padding</a></li><li><a href="global.html#percent">percent</a></li><li><a href="global.html#px">px</a></li><li><a href="global.html#rem">rem</a></li><li><a href="global.html#s">s</a></li><li><a href="global.html#selector">selector</a></li><li><a href="global.html#shadow">shadow</a></li><li><a href="global.html#vh">vh</a></li><li><a href="global.html#vmax">vmax</a></li><li><a href="global.html#vmin">vmin</a></li><li><a href="global.html#vw">vw</a></li><li><a href="global.html#width">width</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sun Oct 23 2022 16:59:52 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Fri Oct 28 2022 21:19:36 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

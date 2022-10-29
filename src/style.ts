@@ -1,4 +1,4 @@
-import { PaddingMargin, UnitValue, WidthHeight } from "./interfaces.js"
+import { PaddingMargin, UnitValue, UnitValueGrid, WidthHeight } from "./interfaces.js"
 import { ParameterError } from "./error.js"
 
 // Basic exports
@@ -7,14 +7,16 @@ import Stylesheet from "./stylesheet.js"
 import * as builtin from "./builtin.js"
 
 // Styles imported from the /styles folder
-import { unit, include } from "./util.js"
+import { unit, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr } from "./util.js"
 import { RGB, color, backgroundColor } from "./styles/color.js"
 import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize} from "./styles/background.js"
 import { position, top,left,right,bottom,zIndex } from "./styles/position.js"
 import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js"
+import {transform, translate, rotate, rotate3D, skew, scale} from "./styles/transform.js"
+import { animation, keyframe, createAnimation, transition } from "./styles/animation.js"
+import { gridTemplate, gridColumn, gridGap, gridRow } from "./styles/grid.js"
 import { flex } from "./styles/flex.js"
 import { font } from "./styles/font.js"
-import { grid } from "./styles/grid.js"
 import { listStyle } from "./styles/list.js"
 
 export {
@@ -26,6 +28,18 @@ export {
     // other
     unit,
     include,
+    UnitValueGrid,
+    UnitValue,
+    rem,
+    px,
+    em,
+    vh,
+    vw,
+    vmin,
+    vmax,
+    percent,
+    s,
+    fr,
     
     // Color
     RGB,
@@ -66,10 +80,28 @@ export {
     font,
 
     // grid
-    grid,
+    gridTemplate,
+    gridColumn,
+    gridGap,
+    gridRow,
+
 
     // List
-    listStyle
+    listStyle,
+
+    // Transform
+    transform,
+    translate,
+    rotate,
+    rotate3D,
+    skew,
+    scale,
+
+    // Animation
+    animation,
+    keyframe,
+    createAnimation,
+    transition
 }
 
 /**
@@ -104,42 +136,48 @@ export function media(query:string, styles:Array<Object>) {
  * CSS Display property
  * @param opt Display option
  */
-export function display(opt:'flex' | 'inline-flex' | 'block' | 'inline-block' | 'inline' | 'none') {
+export function display(opt:'flex' | 'inline-flex' | 'block' | 'inline-block' | 'inline' | 'none'| 'grid' | 'inline-grid') {
     return {display: opt}
 }
 
 /**
  * Apply padding to an element.
- * @param unit Unit of measurement (default: `px`)
  * @param top Top padding (default: `0`)
  * @param right Right padding (default: `0`)
  * @param bottom Bottom padding (default: `0`)
  * @param left Left padding (default: `0`)
+ * @param all Apply the same padding to all sides
  * @param auto Auto padding. Overrides other parameters (default: `false`)
  */
 export function padding(opts:Partial<PaddingMargin>) {
+    if(!opts) throw new ParameterError()
     if(opts.auto) {
-        return {padding: 'auto'}
+        return {"padding": `auto`}
     }
-    return {"padding": `${opts.top|0}${opts.unit} ${opts.right|0}${opts.unit} ${opts.bottom|0}${opts.unit} ${opts.left|0}${opts.unit}`}
+    if(opts.all) {
+        return {"padding": `${opts.all.v}${opts.all.u}`}
+    }
+    return {"padding": `${opts.top.v|0}${opts.top.u} ${opts.right.v|0}${opts.right.u} ${opts.bottom.v|0}${opts.bottom.u} ${opts.left.v|0}${opts.left.u}`}
 }
 
 /**
  * Apply margin to an element.
- * @param unit Unit of measurement (default: `px`)
  * @param top Top margin (default: `0`)
  * @param right Right margin (default: `0`)
  * @param bottom Bottom margin (default: `0`)
  * @param left Left margin (default: `0`)
+ * @param all Apply the same margin to all sides
  * @param auto Auto margin. Overrides other parameters (default: `false`)
  */
- export function margin(opts:Partial<PaddingMargin>={unit:'px', top:0, right:0, bottom:0, left:0, auto:false}) {
+export function margin(opts:Partial<PaddingMargin>) {
     if(!opts) throw new ParameterError()
-    if(!opts.unit) opts.unit = 'px'
     if(opts.auto) {
         return {"margin": `auto`}
     }
-    return {"margin": `${opts.top|0}${opts.unit} ${opts.right|0}${opts.unit} ${opts.bottom|0}${opts.unit} ${opts.left|0}${opts.unit}`}
+    if(opts.all) {
+        return {"margin": `${opts.all.v}${opts.all.u}`}
+    }
+    return {"margin": `${opts.top.v|0}${opts.top.u} ${opts.right.v|0}${opts.right.u} ${opts.bottom.v|0}${opts.bottom.u} ${opts.left.v|0}${opts.left.u}`}
 }
 
 /**
@@ -150,9 +188,9 @@ export function padding(opts:Partial<PaddingMargin>) {
  */
 export function width(opts:Partial<WidthHeight>) {
     let out = {};
-    if(opts.min) out['min-width'] = `${opts.min.value}${opts.min.unit}`;
-    if(opts.max) out['max-width'] = `${opts.max.value}${opts.max.unit}`;
-    if(opts.value) out['width'] = `${opts.value.value}${opts.value.unit}`;
+    if(opts.min) out['min-width'] = `${opts.min.v}${opts.min.u}`;
+    if(opts.max) out['max-width'] = `${opts.max.v}${opts.max.u}`;
+    if(opts.current) out['width'] = `${opts.current.v}${opts.current.u}`;
     return out;
 }
 
@@ -164,9 +202,9 @@ export function width(opts:Partial<WidthHeight>) {
  */
 export function height(opts:Partial<WidthHeight>) {
     let out = {};
-    if(opts.min) out['min-height'] = `${opts.min.value}${opts.min.unit}`;
-    if(opts.max) out['max-height'] = `${opts.max.value}${opts.max.unit}`;
-    if(opts.value) out['height'] = `${opts.value.value}${opts.value.unit}`;
+    if(opts.min) out['min-height'] = `${opts.min.v}${opts.min.u}`;
+    if(opts.max) out['max-height'] = `${opts.max.v}${opts.max.u}`;
+    if(opts.current) out['height'] = `${opts.current.v}${opts.current.u}`;
     return out;
 }
 
@@ -213,4 +251,12 @@ export function cursor(value:'auto' | 'default' | 'none' | 'context-menu' | 'hel
  */
 export function direction(value:'ltr' | 'rtl') {
     return {'direction': value}
+}
+
+/**
+ * Set the opacity of an element
+ * @param value The opacity value
+ */
+export function opacity(value:number) {
+    return {'opacity': value}
 }

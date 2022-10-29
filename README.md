@@ -3,6 +3,9 @@
 Note: AuraJSS is still in active development. 
 Some things may not work as expected and may change at any point.
 ```
+```
+WARNING: V1.1 introduces a breaking change to UnitValue. `unit` now is `u`, and `value` is `v`.
+```
 AuraJSS is a library that allows you to create fully fledged stylesheets using Javascript. With a high focus on being dynamic, you can choose to compile to file, or to do it on the fly!
 
 ## But why?
@@ -51,7 +54,7 @@ const sheet = new Stylesheet{[
 
 compile({
     input: sheet,
-    output: './aurajss.css'
+    outpath: './aurajss.css',
 });
 ```
 Now, if you run your script, it will start compiling the Stylesheet into CSS and (if everything goes correct) a new file will be created with the name present in `output`. You can disable writing to file by not providing an `output` path.

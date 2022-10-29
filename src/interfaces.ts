@@ -1,24 +1,29 @@
 import { Stylesheet } from "./style.js"
-import { unit } from "./util.js"
+import { unit, unitGrid } from "./util.js"
 
 export interface PaddingMargin {
-    unit:'px'|'em'|'rem',
-    top:number, 
-    right:number, 
-    bottom:number, 
-    left:number,
+    top:UnitValue,
+    right:UnitValue,
+    bottom:UnitValue,
+    left:UnitValue,
+    all:UnitValue,
     auto:boolean
 }
 
 export interface UnitValue {
-    unit: unit,
-    value: number
+    u: unit,
+    v: number
+}
+
+export interface UnitValueGrid{
+    v: number,
+    u: unitGrid,
 }
 
 export interface WidthHeight {
     min?: UnitValue,
     max?: UnitValue,
-    value?: UnitValue,
+    current?: UnitValue,
 }
 
 export interface CompilerOptions {
@@ -77,4 +82,26 @@ export interface Keyframe {
     from?: Object,
     to?: Object,
     percent?: number,
+}
+
+export interface GridTemplate {
+    rows?: Array<string|UnitValueGrid|number>,
+    columns?: Array<string|UnitValueGrid|number>,
+}
+
+export interface GridStartEnd {
+    start?: number|'auto',
+    end?: number|'auto'
+}
+
+export interface GridGap {
+    row?: UnitValue,
+    column?: UnitValue,
+}
+
+export interface Transition {
+    props:string|Array<String>,
+    duration:UnitValue,
+    timing?:'linear'|'ease'|'ease-in'|'ease-out'|'ease-in-out'|'step-start'|'step-end',
+    delay?:UnitValue,
 }

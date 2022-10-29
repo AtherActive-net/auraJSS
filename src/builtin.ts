@@ -36,9 +36,9 @@ function generateWithBreakpoints(selectorString:string, breakpoints:Object,divis
                 media(`only screen and (max-width: ${breakpoints[size]}px)`,[
                     selector(`${selectorString}-${size}-${index}`,[
                         width({
-                            value: {
-                                unit: '%',
-                                value: 100/(12/index)
+                            current: {
+                                u: '%',
+                                v: 100/(12/index)
                             }
                         }),
                     ])
@@ -53,7 +53,7 @@ function generateWithBreakpoints(selectorString:string, breakpoints:Object,divis
             generateSizes(i),
             selector(`${selectorString}-${i}`,[
                 width({
-                    value: {unit: '%', value: 100/(12/i)},
+                    current: {u: '%', v: 100/(12/i)},
                 })
             ])
         ])
