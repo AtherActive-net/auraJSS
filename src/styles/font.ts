@@ -1,5 +1,13 @@
 import { FontOptions } from "../interfaces.js";
 
+/**
+ * Set the font settings on an element
+ * @param size The size of the font
+ * @param family The font family
+ * @param weight The font weight
+ * @param style The font style
+ * @param variant The font variant
+ */
 export function font(opts:FontOptions) {
     let out = {};
     if(opts.size) out['font-size'] = opts.size;
