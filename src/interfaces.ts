@@ -105,3 +105,11 @@ export interface Transition {
     timing?:'linear'|'ease'|'ease-in'|'ease-out'|'ease-in-out'|'step-start'|'step-end',
     delay?:UnitValue,
 }
+
+export interface BorderRadius {
+    all?: UnitValue,
+    topLeft?: UnitValue,
+    topRight?: UnitValue,
+    bottomLeft?: UnitValue,
+    bottomRight?: UnitValue,
+}
