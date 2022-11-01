@@ -74,7 +74,11 @@ export function borderImage(source?:string, slice?:number, width?:number, outset
 
 /**
  * Apply a radius to the border
- * @param radius Radius of the border
+ * @param all The radius of all corners
+ * @param topLeft The radius of the top corners
+ * @param topRight The radius of the top right corner
+ * @param bottomLeft The radius of the bottom left corner
+ * @param bottomRight The radius of the bottom right corner
  */
 export function borderRadius(opts:BorderRadius) {
     if(opts.all) return {'border-radius': `${opts.all.v}${opts.all.u}`}
