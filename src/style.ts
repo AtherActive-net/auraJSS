@@ -157,7 +157,12 @@ export function padding(opts:Partial<PaddingMargin>) {
     if(opts.all) {
         return {"padding": `${opts.all.v}${opts.all.u}`}
     }
-    return {"padding": `${opts.top.v|0}${opts.top.u} ${opts.right.v|0}${opts.right.u} ${opts.bottom.v|0}${opts.bottom.u} ${opts.left.v|0}${opts.left.u}`}
+    if(!opts.top) opts.top = {v:0,u:'px'}
+    if(!opts.right) opts.right = {v:0,u:'px'}
+    if(!opts.bottom) opts.bottom = {v:0,u:'px'}
+    if(!opts.left) opts.left = {v:0,u:'px'}
+
+    return {"padding": `${opts.top.v}${opts.top.u} ${opts.right.v}${opts.right.u} ${opts.bottom.v}${opts.bottom.u} ${opts.left.v}${opts.left.u}`}
 }
 
 /**
@@ -177,7 +182,12 @@ export function margin(opts:Partial<PaddingMargin>) {
     if(opts.all) {
         return {"margin": `${opts.all.v}${opts.all.u}`}
     }
-    return {"margin": `${opts.top.v|0}${opts.top.u} ${opts.right.v|0}${opts.right.u} ${opts.bottom.v|0}${opts.bottom.u} ${opts.left.v|0}${opts.left.u}`}
+    if(!opts.top) opts.top = {v:0,u:'px'}
+    if(!opts.right) opts.right = {v:0,u:'px'}
+    if(!opts.bottom) opts.bottom = {v:0,u:'px'}
+    if(!opts.left) opts.left = {v:0,u:'px'}
+
+    return {"margin": `${opts.top.v}${opts.top.u} ${opts.right.v}${opts.right.u} ${opts.bottom.v}${opts.bottom.u} ${opts.left.v}${opts.left.u}`}
 }
 
 /**
