@@ -105,6 +105,7 @@ export {
     transition
 }
 
+type selectorAutofill = '&:hover'|'&:focus'|'&:focus-visible'|'&:focus-within'|'&:active'|'&:visited'|'&:link'|'&:first-child'|'&:last-child'|'&:nth-last-child'|'&:only-child'|'&:first-of-type'|'&:last-of-type'|'&:nth-last-of-type'|'&:only-of-type'|'&:empty'|'&:target'|'&:enabled'|'&:disabled'|'&:checked'|'&:not'|'&:root'|'&:nth-last-child'|'&:nth-last-of-type'|'&:first'|'&:last'|'&:only'|'&:read-only'|'&:read-write'|'&:placeholder-shown'|'&:default'|'&:valid'|'&:invalid'|'&:in-range'|'&:out-of-range'|'&:required'|'&:optional'|'&:dir'|'&:lang'|'&:current'|'&:past'|'&:future'|'&:scope'|'&:indeterminate'|'&:user-invalid'|'&:user-valid'|'&:drop'
 /**
  * A selector to select a CSS class.
  * @param selector CSS selector. You can use `&` to apply something to the current selector.
@@ -120,7 +121,9 @@ export {
  * selector('.test',[ selector('&:hover',[]) ])
  * ```
  */
- export function selector(selector:string, style:Array<any>) {
+export function selector(selector:selectorAutofill,style:Array<any>): Object;
+export function selector(selector:string,style:Array<any>): Object;
+export function selector(selector:string, style:Array<any>): Object {
     return {selector, style}
 }
 
