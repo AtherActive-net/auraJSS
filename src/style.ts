@@ -224,15 +224,14 @@ export function height(opts:Partial<WidthHeight>) {
 
 /**
  * Create a new shadow.
- * @param unit The unit to use (This is used for ALL values below)
  * @param hOffset The horizontal offset of the shadow
  * @param vOffset The vertical offset of the shadow
  * @param blur The blur distance
  * @param spread The spread of the shadow
  * @param color The color of the shadow
  */
-export function shadow(unit:unit,hOffset:number=0, vOffset:number=0, blur:number=0, spread:number=0, color:RGB) {
-    return {'box-shadow': `${hOffset}${unit} ${vOffset}${unit} ${blur}${unit} ${spread}${unit} ${color}`}
+export function shadow(hOffset:UnitValue, vOffset:UnitValue, blur:UnitValue, spread:UnitValue, color:RGB) {
+    return {'box-shadow': `${hOffset.v}${hOffset.u} ${vOffset.v}${vOffset.u} ${blur.v}${blur.u} ${spread.v}${spread.u} ${color}`}
 }
 
 /**
