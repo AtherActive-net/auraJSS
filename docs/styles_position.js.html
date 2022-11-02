@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: styles/list.js</title>
+    <title>JSDoc: Source: styles/position.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: styles/list.js</h1>
+    <h1 class="page-title">Source: styles/position.js</h1>
 
     
 
@@ -26,21 +26,50 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Define how List indicators should be displayed.
- * @param {string} type The type of icon to use
- * @param {string} position The position of the icon
- * @param {string} image The image to use as the icon
+            <pre class="prettyprint source linenums"><code>export function position(value) {
+    return { position: value };
+}
+/**
+ * Left position of an element.
+ * @param val The value for the left position.
  */
-export function listStyle(opts) {
-    let out = {};
-    if (opts.type)
-        out['list-style-type'] = opts.type;
-    if (opts.position)
-        out['list-style-position'] = opts.position;
-    if (opts.image)
-        out['list-style-image'] = opts.image;
-    return out;
+export function left(val) {
+    return { left: `${val.v}${val.u}` };
+}
+/**
+ * Left position of an element.
+ * @param val The value for the left position.
+ */
+export function right(val) {
+    return { right: `${val.v}${val.u}` };
+}
+/**
+ * Left position of an element.
+ * @param val The value for the left position.
+ */
+export function top(val) {
+    return { top: `${val.v}${val.u}` };
+}
+/**
+ * Left position of an element.
+ * @param val The value for the left position.
+ */
+export function bottom(val) {
+    return { bottom: `${val.v}${val.u}` };
+}
+/**
+ * Set the z-index of an element.
+ * @param value The index of this element
+ */
+export function zIndex(value) {
+    return { 'z-index': value };
+}
+/**
+ * Configure how an eleemnt should fit in another element
+ * @param {string} val The value for object-fit. (contain | cover | fill | none | scale-down)
+ */
+export function objectFit(val) {
+    return { 'object-fit': val };
 }
 </code></pre>
         </article>

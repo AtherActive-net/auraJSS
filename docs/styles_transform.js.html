@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: styles/list.js</title>
+    <title>JSDoc: Source: styles/transform.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: styles/list.js</h1>
+    <h1 class="page-title">Source: styles/transform.js</h1>
 
     
 
@@ -27,20 +27,63 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Define how List indicators should be displayed.
- * @param {string} type The type of icon to use
- * @param {string} position The position of the icon
- * @param {string} image The image to use as the icon
+ * Apply a 2d (or 3d) transform to an element.
+ * @param {Object} transformFunction Here you can specify the transform function. For example: `rotate()`
  */
-export function listStyle(opts) {
-    let out = {};
-    if (opts.type)
-        out['list-style-type'] = opts.type;
-    if (opts.position)
-        out['list-style-position'] = opts.position;
-    if (opts.image)
-        out['list-style-image'] = opts.image;
-    return out;
+export function transform(transformFunction) {
+    return { transform: transformFunction };
+}
+/**
+ * [TRANSFORM FUNCTION]
+ * Translate an element
+ * @param x The x-axis translation
+ * @param y The y-axis translation
+ * @param z The z-axis translation. If left blank it will create a 2D translate.
+ */
+export function translate(x, y, z) {
+    if (z)
+        return `translate3d(${x.v}${x.v}, ${y.v}${y.v}, ${z.v}${z.v})`;
+    return `translate(${x.v}${x.v}, ${y.v}${y.v})`;
+}
+/**
+ * [TRANSFORM FUNCTION]
+ * Scale an element up/down.
+ * @param x The x-axis scale
+ * @param y The y-axis scale
+ * @param z The z-axis scale. If left blank it will create a 2D scale.
+ */
+export function scale(x, y, z) {
+    if (z)
+        return `scale3d(${x}, ${y}, ${z})`;
+    return `scale(${x}, ${y})`;
+}
+/**
+ * [TRANSFORM FUNCTION]
+ * Apply a rotation to an element.
+ * @param angle The angle of rotation
+ */
+export function rotate(angle) {
+    return `rotate(${angle.v}${angle.v})`;
+}
+/**
+ * [TRANSFORM FUNCTION]
+ * Create a 3D rotation
+ * @param x The x-axis rotation (0-1)
+ * @param y The y-axis rotation (0-1)
+ * @param z The z-axis rotation (0-1)
+ * @param angle Angle of rotation
+ */
+export function rotate3D(x, y, z, angle) {
+    return `rotate3d(${x}, ${y}, ${z}, ${angle})`;
+}
+/**
+ * [TRANSFORM FUNCTION]
+ * Skew an element
+ * @param x The x-axis skew
+ * @param y The y-axis skew
+ */
+export function skew(x, y) {
+    return `skew(${x.v}${x.v}, ${y.v}${y.v})`;
 }
 </code></pre>
         </article>
