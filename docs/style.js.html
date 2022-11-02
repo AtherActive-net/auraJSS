@@ -32,32 +32,36 @@ import { compile } from "./compiler.js";
 import Stylesheet from "./stylesheet.js";
 import * as builtin from "./builtin.js";
 // Styles imported from the /styles folder
-import { include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr } from "./util.js";
-import { RGB, color, backgroundColor } from "./styles/color.js";
+import { include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr, deg, rad, turn, grad } from "./util.js";
+import { RGB, RGBA, color, backgroundColor } from "./styles/color.js";
 import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize } from "./styles/background.js";
-import { position, top, left, right, bottom, zIndex } from "./styles/position.js";
+import { position, top, left, right, bottom, zIndex, objectFit } from "./styles/position.js";
 import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js";
 import { transform, translate, rotate, rotate3D, skew, scale } from "./styles/transform.js";
 import { animation, keyframe, createAnimation, transition } from "./styles/animation.js";
+import { filter, blur, brightness, contrast, grayscale, hueRotate, invert, opacity as opacityFilter, saturate, sepia } from "./styles/filter.js";
 import { gridTemplate, gridColumn, gridGap, gridRow } from "./styles/grid.js";
+import { gradient, key } from "./styles/gradient.js";
 import { flex } from "./styles/flex.js";
-import { font } from "./styles/font.js";
+import { font, lineHeight } from "./styles/font.js";
 import { listStyle } from "./styles/list.js";
 export { 
 // basic
-Stylesheet, compile, builtin, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr, 
+Stylesheet, compile, builtin, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr, deg, rad, turn, grad, 
 // Color
-RGB, color, backgroundColor, 
+RGB, RGBA, color, backgroundColor, 
 // Background
 backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize, 
+// Filter
+filter, blur, brightness, contrast, grayscale, hueRotate, invert, opacityFilter, saturate, sepia, 
 // Position
-position, top, left, right, bottom, zIndex, 
+position, top, left, right, bottom, zIndex, objectFit, 
 // Border
 border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage, 
 // flex
 flex, 
 // Font
-font, 
+font, lineHeight, 
 // grid
 gridTemplate, gridColumn, gridGap, gridRow, 
 // List
@@ -65,22 +69,9 @@ listStyle,
 // Transform
 transform, translate, rotate, rotate3D, skew, scale, 
 // Animation
-animation, keyframe, createAnimation, transition };
-/**
- * A selector to select a CSS class.
- * @param selector CSS selector. You can use `&amp;` to apply something to the current selector.
- * @param style Styles to apply to the selector
- *
- * A regular selector (Selecting the .test class)
- * ```ts
- * selector('.test',[])
- * ```
- *
- * Selecting a psuedo class (Selecting the .test:hover class)
- * ```ts
- * selector('.test',[ selector('&amp;:hover',[]) ])
- * ```
- */
+animation, keyframe, createAnimation, transition, 
+// gradient
+gradient, key, };
 export function selector(selector, style) {
     return { selector, style };
 }
@@ -117,7 +108,15 @@ export function padding(opts) {
     if (opts.all) {
         return { "padding": `${opts.all.v}${opts.all.u}` };
     }
-    return { "padding": `${opts.top.v | 0}${opts.top.u} ${opts.right.v | 0}${opts.right.u} ${opts.bottom.v | 0}${opts.bottom.u} ${opts.left.v | 0}${opts.left.u}` };
+    if (!opts.top)
+        opts.top = { v: 0, u: 'px' };
+    if (!opts.right)
+        opts.right = { v: 0, u: 'px' };
+    if (!opts.bottom)
+        opts.bottom = { v: 0, u: 'px' };
+    if (!opts.left)
+        opts.left = { v: 0, u: 'px' };
+    return { "padding": `${opts.top.v}${opts.top.u} ${opts.right.v}${opts.right.u} ${opts.bottom.v}${opts.bottom.u} ${opts.left.v}${opts.left.u}` };
 }
 /**
  * Apply margin to an element.
@@ -137,7 +136,15 @@ export function margin(opts) {
     if (opts.all) {
         return { "margin": `${opts.all.v}${opts.all.u}` };
     }
-    return { "margin": `${opts.top.v | 0}${opts.top.u} ${opts.right.v | 0}${opts.right.u} ${opts.bottom.v | 0}${opts.bottom.u} ${opts.left.v | 0}${opts.left.u}` };
+    if (!opts.top)
+        opts.top = { v: 0, u: 'px' };
+    if (!opts.right)
+        opts.right = { v: 0, u: 'px' };
+    if (!opts.bottom)
+        opts.bottom = { v: 0, u: 'px' };
+    if (!opts.left)
+        opts.left = { v: 0, u: 'px' };
+    return { "margin": `${opts.top.v}${opts.top.u} ${opts.right.v}${opts.right.u} ${opts.bottom.v}${opts.bottom.u} ${opts.left.v}${opts.left.u}` };
 }
 /**
  * Set an elements Width. You can set the current, minimum, and maximum width.
@@ -173,15 +180,14 @@ export function height(opts) {
 }
 /**
  * Create a new shadow.
- * @param unit The unit to use (This is used for ALL values below)
  * @param hOffset The horizontal offset of the shadow
  * @param vOffset The vertical offset of the shadow
  * @param blur The blur distance
  * @param spread The spread of the shadow
  * @param color The color of the shadow
  */
-export function shadow(unit, hOffset = 0, vOffset = 0, blur = 0, spread = 0, color) {
-    return { 'box-shadow': `${hOffset}${unit} ${vOffset}${unit} ${blur}${unit} ${spread}${unit} ${color}` };
+export function shadow(hOffset, vOffset, blur, spread, color) {
+    return { 'box-shadow': `${hOffset.v}${hOffset.u} ${vOffset.v}${vOffset.u} ${blur.v}${blur.u} ${spread.v}${spread.u} ${color}` };
 }
 /**
  * How is the width/height of an element calculated.
@@ -228,13 +234,13 @@ export function opacity(value) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="StyleSheet.html">StyleSheet</a></li></ul><h3>Global</h3><ul><li><a href="global.html#boxSizing">boxSizing</a></li><li><a href="global.html#compile">compile</a></li><li><a href="global.html#compilerLog">compilerLog</a></li><li><a href="global.html#content">content</a></li><li><a href="global.html#cursor">cursor</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#display">display</a></li><li><a href="global.html#em">em</a></li><li><a href="global.html#errorCheckSheet">errorCheckSheet</a></li><li><a href="global.html#fr">fr</a></li><li><a href="global.html#generateBackgroundColorClasses">generateBackgroundColorClasses</a></li><li><a href="global.html#generateColorClasses">generateColorClasses</a></li><li><a href="global.html#generateGridSystem">generateGridSystem</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#include">include</a></li><li><a href="global.html#loopStyles">loopStyles</a></li><li><a href="global.html#margin">margin</a></li><li><a href="global.html#media">media</a></li><li><a href="global.html#opacity">opacity</a></li><li><a href="global.html#padding">padding</a></li><li><a href="global.html#percent">percent</a></li><li><a href="global.html#px">px</a></li><li><a href="global.html#rem">rem</a></li><li><a href="global.html#s">s</a></li><li><a href="global.html#selector">selector</a></li><li><a href="global.html#shadow">shadow</a></li><li><a href="global.html#vh">vh</a></li><li><a href="global.html#vmax">vmax</a></li><li><a href="global.html#vmin">vmin</a></li><li><a href="global.html#vw">vw</a></li><li><a href="global.html#width">width</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="StyleSheet.html">StyleSheet</a></li></ul><h3>Global</h3><ul><li><a href="global.html#boxSizing">boxSizing</a></li><li><a href="global.html#compile">compile</a></li><li><a href="global.html#compilerLog">compilerLog</a></li><li><a href="global.html#content">content</a></li><li><a href="global.html#cursor">cursor</a></li><li><a href="global.html#deg">deg</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#display">display</a></li><li><a href="global.html#em">em</a></li><li><a href="global.html#errorCheckSheet">errorCheckSheet</a></li><li><a href="global.html#fr">fr</a></li><li><a href="global.html#generateBackgroundColorClasses">generateBackgroundColorClasses</a></li><li><a href="global.html#generateColorClasses">generateColorClasses</a></li><li><a href="global.html#generateGridSystem">generateGridSystem</a></li><li><a href="global.html#grad">grad</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#include">include</a></li><li><a href="global.html#loopStyles">loopStyles</a></li><li><a href="global.html#margin">margin</a></li><li><a href="global.html#media">media</a></li><li><a href="global.html#opacity">opacity</a></li><li><a href="global.html#padding">padding</a></li><li><a href="global.html#percent">percent</a></li><li><a href="global.html#px">px</a></li><li><a href="global.html#rad">rad</a></li><li><a href="global.html#rem">rem</a></li><li><a href="global.html#s">s</a></li><li><a href="global.html#shadow">shadow</a></li><li><a href="global.html#turn">turn</a></li><li><a href="global.html#vh">vh</a></li><li><a href="global.html#vmax">vmax</a></li><li><a href="global.html#vmin">vmin</a></li><li><a href="global.html#vw">vw</a></li><li><a href="global.html#width">width</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Fri Oct 28 2022 21:19:36 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Wed Nov 02 2022 14:56:31 GMT+0100 (Central European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
