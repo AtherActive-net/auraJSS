@@ -7,7 +7,7 @@ import Stylesheet from "./stylesheet.js"
 import * as builtin from "./builtin.js"
 
 // Styles imported from the /styles folder
-import { unit, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr } from "./util.js"
+import { unit, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr, deg, rad, turn, grad } from "./util.js"
 import { RGB, RGBA, color, backgroundColor } from "./styles/color.js"
 import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize} from "./styles/background.js"
 import { position, top, left, right, bottom, zIndex, objectFit } from "./styles/position.js"
@@ -16,6 +16,7 @@ import { transform, translate, rotate, rotate3D, skew, scale} from "./styles/tra
 import { animation, keyframe, createAnimation, transition } from "./styles/animation.js"
 import { filter, blur, brightness, contrast, grayscale, hueRotate, invert, opacity as opacityFilter, saturate, sepia} from "./styles/filter.js"
 import { gridTemplate, gridColumn, gridGap, gridRow } from "./styles/grid.js"
+import {gradient, key} from "./styles/gradient.js"
 import { flex } from "./styles/flex.js"
 import { font, lineHeight } from "./styles/font.js"
 import { listStyle } from "./styles/list.js"
@@ -41,6 +42,10 @@ export {
     percent,
     s,
     fr,
+    deg,
+    rad,
+    turn,
+    grad,
     
     // Color
     RGB,
@@ -117,7 +122,11 @@ export {
     animation,
     keyframe,
     createAnimation,
-    transition
+    transition,
+
+    // gradient
+    gradient,
+    key,
 }
 
 type selectorAutofill = '&:hover'|'&:focus'|'&:focus-visible'|'&:focus-within'|'&:active'|'&:visited'|'&:link'|'&:first-child'|'&:last-child'|'&:nth-last-child'|'&:only-child'|'&:first-of-type'|'&:last-of-type'|'&:nth-last-of-type'|'&:only-of-type'|'&:empty'|'&:target'|'&:enabled'|'&:disabled'|'&:checked'|'&:not'|'&:root'|'&:nth-last-child'|'&:nth-last-of-type'|'&:first'|'&:last'|'&:only'|'&:read-only'|'&:read-write'|'&:placeholder-shown'|'&:default'|'&:valid'|'&:invalid'|'&:in-range'|'&:out-of-range'|'&:required'|'&:optional'|'&:dir'|'&:lang'|'&:current'|'&:past'|'&:future'|'&:scope'|'&:indeterminate'|'&:user-invalid'|'&:user-valid'|'&:drop'
