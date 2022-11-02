@@ -8,7 +8,7 @@ import * as builtin from "./builtin.js"
 
 // Styles imported from the /styles folder
 import { unit, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr } from "./util.js"
-import { RGB, color, backgroundColor } from "./styles/color.js"
+import { RGB, RGBA, color, backgroundColor } from "./styles/color.js"
 import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize} from "./styles/background.js"
 import { position, top,left,right,bottom,zIndex } from "./styles/position.js"
 import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js"
@@ -43,6 +43,7 @@ export {
     
     // Color
     RGB,
+    RGBA,
     color,
     backgroundColor,
 
