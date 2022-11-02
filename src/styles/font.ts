@@ -1,4 +1,4 @@
-import { FontOptions } from "../interfaces.js";
+import { FontOptions, UnitValue } from "../interfaces.js";
 
 /**
  * Set the font settings on an element
@@ -17,4 +17,12 @@ export function font(opts:FontOptions) {
     if(opts.variant) out['font-variant'] = opts.variant;
     
     return out;
+}
+
+/**
+ * Set the line height of an element
+ * @param val The line height
+ */
+export function lineHeight(val:UnitValue) {
+    return { 'line-height': `${val.v}${val.u}` };
 }
