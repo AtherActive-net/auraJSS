@@ -3,6 +3,7 @@ import StyleSheet from "stylesheet"
 
 export type unit = 'px'|'em'|'rem'|'vh'|'vw'|'vmin'|'vmax'|'%'|'s'|''
 export type unitGrid = 'px'|'em'|'rem'|'vh'|'vw'|'vmin'|'vmax'|'%'|'fr'|'s'|''
+export type unitRotation = 'deg'|'grad'|'rad'|'turn'|''
 
 /**
  * Include another stylesheet inside a stylesheet.

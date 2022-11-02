@@ -12,8 +12,9 @@ import { RGB, RGBA, color, backgroundColor } from "./styles/color.js"
 import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize} from "./styles/background.js"
 import { position, top, left, right, bottom, zIndex, objectFit } from "./styles/position.js"
 import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js"
-import {transform, translate, rotate, rotate3D, skew, scale} from "./styles/transform.js"
+import { transform, translate, rotate, rotate3D, skew, scale} from "./styles/transform.js"
 import { animation, keyframe, createAnimation, transition } from "./styles/animation.js"
+import { filter, blur, brightness, contrast, grayscale, hueRotate, invert, opacity as opacityFilter, saturate, sepia} from "./styles/filter.js"
 import { gridTemplate, gridColumn, gridGap, gridRow } from "./styles/grid.js"
 import { flex } from "./styles/flex.js"
 import { font, lineHeight } from "./styles/font.js"
@@ -55,6 +56,18 @@ export {
     backgroundOrigin,
     backgroundRepeat,
     backgroundSize,
+
+    // Filter
+    filter,
+    blur,
+    brightness,
+    contrast,
+    grayscale,
+    hueRotate,
+    invert,
+    opacityFilter,
+    saturate,
+    sepia,
 
     // Position
     position,

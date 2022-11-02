@@ -1,5 +1,5 @@
 import { Stylesheet } from "./style.js"
-import { unit, unitGrid } from "./util.js"
+import { unit, unitGrid, unitRotation } from "./util.js"
 
 export interface PaddingMargin {
     top:UnitValue,
@@ -12,6 +12,11 @@ export interface PaddingMargin {
 
 export interface UnitValue {
     u: unit,
+    v: number
+}
+
+export interface UnitValueRotation {
+    u: unitRotation,
     v: number
 }
 
