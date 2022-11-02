@@ -7,16 +7,18 @@ import Stylesheet from "./stylesheet.js"
 import * as builtin from "./builtin.js"
 
 // Styles imported from the /styles folder
-import { unit, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr } from "./util.js"
-import { RGB, color, backgroundColor } from "./styles/color.js"
+import { unit, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr, deg, rad, turn, grad } from "./util.js"
+import { RGB, RGBA, color, backgroundColor } from "./styles/color.js"
 import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize} from "./styles/background.js"
-import { position, top,left,right,bottom,zIndex } from "./styles/position.js"
+import { position, top, left, right, bottom, zIndex, objectFit } from "./styles/position.js"
 import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js"
-import {transform, translate, rotate, rotate3D, skew, scale} from "./styles/transform.js"
+import { transform, translate, rotate, rotate3D, skew, scale} from "./styles/transform.js"
 import { animation, keyframe, createAnimation, transition } from "./styles/animation.js"
+import { filter, blur, brightness, contrast, grayscale, hueRotate, invert, opacity as opacityFilter, saturate, sepia} from "./styles/filter.js"
 import { gridTemplate, gridColumn, gridGap, gridRow } from "./styles/grid.js"
+import {gradient, key} from "./styles/gradient.js"
 import { flex } from "./styles/flex.js"
-import { font } from "./styles/font.js"
+import { font, lineHeight } from "./styles/font.js"
 import { listStyle } from "./styles/list.js"
 
 export {
@@ -40,9 +42,14 @@ export {
     percent,
     s,
     fr,
+    deg,
+    rad,
+    turn,
+    grad,
     
     // Color
     RGB,
+    RGBA,
     color,
     backgroundColor,
 
@@ -55,6 +62,18 @@ export {
     backgroundRepeat,
     backgroundSize,
 
+    // Filter
+    filter,
+    blur,
+    brightness,
+    contrast,
+    grayscale,
+    hueRotate,
+    invert,
+    opacityFilter,
+    saturate,
+    sepia,
+
     // Position
     position,
     top,
@@ -62,6 +81,7 @@ export {
     right,
     bottom,
     zIndex,
+    objectFit,
 
     // Border
     border,
@@ -78,6 +98,7 @@ export {
 
     // Font
     font,
+    lineHeight,
 
     // grid
     gridTemplate,
@@ -101,9 +122,14 @@ export {
     animation,
     keyframe,
     createAnimation,
-    transition
+    transition,
+
+    // gradient
+    gradient,
+    key,
 }
 
+type selectorAutofill = '&:hover'|'&:focus'|'&:focus-visible'|'&:focus-within'|'&:active'|'&:visited'|'&:link'|'&:first-child'|'&:last-child'|'&:nth-last-child'|'&:only-child'|'&:first-of-type'|'&:last-of-type'|'&:nth-last-of-type'|'&:only-of-type'|'&:empty'|'&:target'|'&:enabled'|'&:disabled'|'&:checked'|'&:not'|'&:root'|'&:nth-last-child'|'&:nth-last-of-type'|'&:first'|'&:last'|'&:only'|'&:read-only'|'&:read-write'|'&:placeholder-shown'|'&:default'|'&:valid'|'&:invalid'|'&:in-range'|'&:out-of-range'|'&:required'|'&:optional'|'&:dir'|'&:lang'|'&:current'|'&:past'|'&:future'|'&:scope'|'&:indeterminate'|'&:user-invalid'|'&:user-valid'|'&:drop'
 /**
  * A selector to select a CSS class.
  * @param selector CSS selector. You can use `&` to apply something to the current selector.
@@ -119,7 +145,9 @@ export {
  * selector('.test',[ selector('&:hover',[]) ])
  * ```
  */
- export function selector(selector:string, style:Array<any>) {
+export function selector(selector:selectorAutofill,style:Array<any>): Object;
+export function selector(selector:string,style:Array<any>): Object;
+export function selector(selector:string, style:Array<any>): Object {
     return {selector, style}
 }
 
@@ -157,7 +185,12 @@ export function padding(opts:Partial<PaddingMargin>) {
     if(opts.all) {
         return {"padding": `${opts.all.v}${opts.all.u}`}
     }
-    return {"padding": `${opts.top.v|0}${opts.top.u} ${opts.right.v|0}${opts.right.u} ${opts.bottom.v|0}${opts.bottom.u} ${opts.left.v|0}${opts.left.u}`}
+    if(!opts.top) opts.top = {v:0,u:'px'}
+    if(!opts.right) opts.right = {v:0,u:'px'}
+    if(!opts.bottom) opts.bottom = {v:0,u:'px'}
+    if(!opts.left) opts.left = {v:0,u:'px'}
+
+    return {"padding": `${opts.top.v}${opts.top.u} ${opts.right.v}${opts.right.u} ${opts.bottom.v}${opts.bottom.u} ${opts.left.v}${opts.left.u}`}
 }
 
 /**
@@ -177,7 +210,12 @@ export function margin(opts:Partial<PaddingMargin>) {
     if(opts.all) {
         return {"margin": `${opts.all.v}${opts.all.u}`}
     }
-    return {"margin": `${opts.top.v|0}${opts.top.u} ${opts.right.v|0}${opts.right.u} ${opts.bottom.v|0}${opts.bottom.u} ${opts.left.v|0}${opts.left.u}`}
+    if(!opts.top) opts.top = {v:0,u:'px'}
+    if(!opts.right) opts.right = {v:0,u:'px'}
+    if(!opts.bottom) opts.bottom = {v:0,u:'px'}
+    if(!opts.left) opts.left = {v:0,u:'px'}
+
+    return {"margin": `${opts.top.v}${opts.top.u} ${opts.right.v}${opts.right.u} ${opts.bottom.v}${opts.bottom.u} ${opts.left.v}${opts.left.u}`}
 }
 
 /**
@@ -210,15 +248,14 @@ export function height(opts:Partial<WidthHeight>) {
 
 /**
  * Create a new shadow.
- * @param unit The unit to use (This is used for ALL values below)
  * @param hOffset The horizontal offset of the shadow
  * @param vOffset The vertical offset of the shadow
  * @param blur The blur distance
  * @param spread The spread of the shadow
  * @param color The color of the shadow
  */
-export function shadow(unit:unit,hOffset:number=0, vOffset:number=0, blur:number=0, spread:number=0, color:RGB) {
-    return {'box-shadow': `${hOffset}${unit} ${vOffset}${unit} ${blur}${unit} ${spread}${unit} ${color}`}
+export function shadow(hOffset:UnitValue, vOffset:UnitValue, blur:UnitValue, spread:UnitValue, color:RGB) {
+    return {'box-shadow': `${hOffset.v}${hOffset.u} ${vOffset.v}${vOffset.u} ${blur.v}${blur.u} ${spread.v}${spread.u} ${color}`}
 }
 
 /**

@@ -1,4 +1,4 @@
-import { UnitValue } from "interfaces.js";
+import { BorderRadius, UnitValue } from "interfaces.js";
 import { unit } from "../util.js";
 import { RGB } from "./color";
 /**
@@ -74,8 +74,19 @@ export function borderImage(source?:string, slice?:number, width?:number, outset
 
 /**
  * Apply a radius to the border
- * @param radius Radius of the border
+ * @param all The radius of all corners
+ * @param topLeft The radius of the top corners
+ * @param topRight The radius of the top right corner
+ * @param bottomLeft The radius of the bottom left corner
+ * @param bottomRight The radius of the bottom right corner
  */
- export function borderRadius(value:UnitValue) {
-    return { "border-radius": `${value.v}${value.u}` };
+export function borderRadius(opts:BorderRadius) {
+    if(opts.all) return {'border-radius': `${opts.all.v}${opts.all.u}`}
+    
+    let out = {}
+    if(opts.topLeft) out['border-top-left-radius'] = `${opts.topLeft.v}${opts.topLeft.u}`
+    if(opts.topRight) out['border-top-right-radius'] = `${opts.topRight.v}${opts.topRight.u}`
+    if(opts.bottomLeft) out['border-bottom-left-radius'] = `${opts.bottomLeft.v}${opts.bottomLeft.u}`
+    if(opts.bottomRight) out['border-bottom-right-radius'] = `${opts.bottomRight.v}${opts.bottomRight.u}`
+    return out
 }

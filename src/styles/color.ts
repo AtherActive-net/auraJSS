@@ -20,11 +20,28 @@ export class RGB extends Style {
     }
 }
 
+export class RGBA extends RGB {
+    public a: number
+
+    constructor(r:number, g:number, b:number, a:number) {
+        super(r,g,b);
+        this.a = a;
+    }
+
+    /**
+     * Create a string of the stored values, needed for CSS.
+     * @returns A string of the RGBA color in the format 'rgba(r,g,b,a)'
+     */
+    public toString(): string {
+        return `rgba(${this.r}, ${this.g}, ${this.b}, ${this.a})`;
+    }
+}
+
 /**
  * Apply a color to text.
  * @param color A color to apply to text
  */
-export function color(color:RGB) {
+export function color(color:RGB|RGBA) {
     return {color}
 }
 
@@ -32,7 +49,7 @@ export function color(color:RGB) {
  * Apply a color to the background
  * @param color A color to apply to the background
  */
-export function backgroundColor(color:RGB) {
+export function backgroundColor(color:RGB|RGBA) {
     return {"background-color": color.toString()}
 }
 

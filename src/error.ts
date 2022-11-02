@@ -15,6 +15,13 @@ export class ParameterError extends Error {
     }
 }
 
+export class FunctionParamErorr extends Error {
+    constructor(msg) {
+        super(msg);
+        this.name = "FunctionParamError";
+    }
+}
+
 export class CompileError extends Error {
     constructor(message:string) {
         let formatted = `An error occured while compiling the stylesheet.\n\n${message}\n`;

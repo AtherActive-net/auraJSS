@@ -38,7 +38,7 @@ function generateWithBreakpoints(selectorString:string, breakpoints:Object,divis
                         width({
                             current: {
                                 u: '%',
-                                v: 100/(12/index)
+                                v: 100/(divisions/index)
                             }
                         }),
                     ])
@@ -53,7 +53,7 @@ function generateWithBreakpoints(selectorString:string, breakpoints:Object,divis
             generateSizes(i),
             selector(`${selectorString}-${i}`,[
                 width({
-                    current: {u: '%', v: 100/(12/i)},
+                    current: {u: '%', v: 100/(divisions/i)},
                 })
             ])
         ])

@@ -1,8 +1,9 @@
-import { UnitValue, UnitValueGrid } from "interfaces"
+import { UnitValue, UnitValueGrid, UnitValueRotation } from "interfaces"
 import StyleSheet from "stylesheet"
 
 export type unit = 'px'|'em'|'rem'|'vh'|'vw'|'vmin'|'vmax'|'%'|'s'|''
 export type unitGrid = 'px'|'em'|'rem'|'vh'|'vw'|'vmin'|'vmax'|'%'|'fr'|'s'|''
+export type unitRotation = 'deg'|'grad'|'rad'|'turn'|''
 
 /**
  * Include another stylesheet inside a stylesheet.
@@ -90,4 +91,36 @@ export function s(value:number): UnitValue {
  */
 export function fr(value:number): UnitValueGrid {
     return {u:'fr', v:value}
+}
+
+/**
+ * Create a UnitValueRotation object with the unit of `deg`.
+ * @param value The value that should be paired with the unit
+*/
+export function deg(value:number): UnitValueRotation {
+    return {u:'deg', v:value}
+}
+
+/**
+ * Create a UnitValueRotation object with the unit of `grad`.
+ * @param value The value that should be paired with the unit
+*/
+export function grad(value:number): UnitValueRotation {
+    return {u:'grad', v:value}
+}
+
+/**
+ * Create a UnitValueRotation object with the unit of `rad`.
+ * @param value The value that should be paired with the unit
+*/
+export function rad(value:number): UnitValueRotation {
+    return {u:'rad', v:value}
+}
+
+/**
+ * Create a UnitValueRotation object with the unit of `turn`.
+ * @param value The value that should be paired with the unit
+*/
+export function turn(value:number): UnitValueRotation {
+    return {u:'turn', v:value}
 }
