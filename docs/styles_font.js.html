@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: styles/list.js</title>
+    <title>JSDoc: Source: styles/font.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: styles/list.js</h1>
+    <h1 class="page-title">Source: styles/font.js</h1>
 
     
 
@@ -27,20 +27,33 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Define how List indicators should be displayed.
- * @param {string} type The type of icon to use
- * @param {string} position The position of the icon
- * @param {string} image The image to use as the icon
+ * Set the font settings on an element
+ * @param size The size of the font
+ * @param family The font family
+ * @param weight The font weight
+ * @param style The font style
+ * @param variant The font variant
  */
-export function listStyle(opts) {
+export function font(opts) {
     let out = {};
-    if (opts.type)
-        out['list-style-type'] = opts.type;
-    if (opts.position)
-        out['list-style-position'] = opts.position;
-    if (opts.image)
-        out['list-style-image'] = opts.image;
+    if (opts.size)
+        out['font-size'] = `${opts.size.v}${opts.size.u}`;
+    if (opts.family)
+        out['font-family'] = opts.family;
+    if (opts.weight)
+        out['font-weight'] = opts.weight;
+    if (opts.style)
+        out['font-style'] = opts.style;
+    if (opts.variant)
+        out['font-variant'] = opts.variant;
     return out;
+}
+/**
+ * Set the line height of an element
+ * @param val The line height
+ */
+export function lineHeight(val) {
+    return { 'line-height': `${val.v}${val.u}` };
 }
 </code></pre>
         </article>
