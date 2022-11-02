@@ -10,13 +10,13 @@ import * as builtin from "./builtin.js"
 import { unit, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr } from "./util.js"
 import { RGB, RGBA, color, backgroundColor } from "./styles/color.js"
 import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize} from "./styles/background.js"
-import { position, top,left,right,bottom,zIndex } from "./styles/position.js"
+import { position, top, left, right, bottom, zIndex, objectFit } from "./styles/position.js"
 import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js"
 import {transform, translate, rotate, rotate3D, skew, scale} from "./styles/transform.js"
 import { animation, keyframe, createAnimation, transition } from "./styles/animation.js"
 import { gridTemplate, gridColumn, gridGap, gridRow } from "./styles/grid.js"
 import { flex } from "./styles/flex.js"
-import { font } from "./styles/font.js"
+import { font, lineHeight } from "./styles/font.js"
 import { listStyle } from "./styles/list.js"
 
 export {
@@ -63,6 +63,7 @@ export {
     right,
     bottom,
     zIndex,
+    objectFit,
 
     // Border
     border,
@@ -79,6 +80,7 @@ export {
 
     // Font
     font,
+    lineHeight,
 
     // grid
     gridTemplate,
