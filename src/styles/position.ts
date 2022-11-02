@@ -44,3 +44,11 @@ export function bottom(val:UnitValue) {
 export function zIndex(value:number) {
     return { 'z-index': value };
 }
+
+/**
+ * Configure how an eleemnt should fit in another element
+ * @param {string} val The value for object-fit. (contain | cover | fill | none | scale-down)
+ */
+export function objectFit(val: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down') {
+    return { 'object-fit': val };
+}
