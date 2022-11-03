@@ -1,13 +1,17 @@
 import { UnitValue } from "interfaces.js";
 import { unit } from "../util.js";
 
+/**
+ * Set the position of an element.
+ * @param {'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'} value The position to use
+ */
 export function position(value: 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky') {
     return { position: value };
 }
 
 /**
  * Left position of an element.
- * @param val The value for the left position.
+ * @param {UnitValue} val The value for the left position.
  */
 export function left(val:UnitValue) {
     return { left: `${val.v}${val.u}` };
@@ -15,7 +19,7 @@ export function left(val:UnitValue) {
 
 /**
  * Left position of an element.
- * @param val The value for the left position.
+ * @param {UnitValue} val The value for the left position.
  */
 export function right(val:UnitValue) {
     return { right: `${val.v}${val.u}` };
@@ -23,7 +27,7 @@ export function right(val:UnitValue) {
 
 /**
  * Left position of an element.
- * @param val The value for the left position.
+ * @param {UnitValue} val The value for the left position.
  */
 export function top(val:UnitValue) {
     return { top: `${val.v}${val.u}` };
@@ -31,7 +35,7 @@ export function top(val:UnitValue) {
 
 /**
  * Left position of an element.
- * @param val The value for the left position.
+ * @param {UnitValue} val The value for the left position.
  */
 export function bottom(val:UnitValue) {
     return { bottom: `${val.v}${val.u}` };
@@ -39,7 +43,7 @@ export function bottom(val:UnitValue) {
 
 /**
  * Set the z-index of an element.
- * @param value The index of this element
+ * @param {UnitValue} value The index of this element
  */
 export function zIndex(value:number) {
     return { 'z-index': value };

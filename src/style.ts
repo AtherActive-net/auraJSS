@@ -132,8 +132,8 @@ export {
 type selectorAutofill = '&:hover'|'&:focus'|'&:focus-visible'|'&:focus-within'|'&:active'|'&:visited'|'&:link'|'&:first-child'|'&:last-child'|'&:nth-last-child'|'&:only-child'|'&:first-of-type'|'&:last-of-type'|'&:nth-last-of-type'|'&:only-of-type'|'&:empty'|'&:target'|'&:enabled'|'&:disabled'|'&:checked'|'&:not'|'&:root'|'&:nth-last-child'|'&:nth-last-of-type'|'&:first'|'&:last'|'&:only'|'&:read-only'|'&:read-write'|'&:placeholder-shown'|'&:default'|'&:valid'|'&:invalid'|'&:in-range'|'&:out-of-range'|'&:required'|'&:optional'|'&:dir'|'&:lang'|'&:current'|'&:past'|'&:future'|'&:scope'|'&:indeterminate'|'&:user-invalid'|'&:user-valid'|'&:drop'
 /**
  * A selector to select a CSS class.
- * @param selector CSS selector. You can use `&` to apply something to the current selector.
- * @param style Styles to apply to the selector
+ * @param {string} selector CSS selector. You can use `&` to apply something to the current selector.
+ * @param {Array<Object>} style Styles to apply to the selector
  * 
  * A regular selector (Selecting the .test class)
  * ```ts
@@ -153,8 +153,8 @@ export function selector(selector:string, style:Array<any>): Object {
 
 /**
  * Create a new media query.
- * @param query The query. For example: `only screen and (min-width: 768px)`
- * @param styles Styles/selctors which will be part of this media query
+ * @param {string} query The query. For example: `only screen and (min-width: 768px)`
+ * @param {Array<Object>} styles Styles/selctors which will be part of this media query
  */
 export function media(query:string, styles:Array<Object>) {
     return {media: query, styles: styles}
@@ -162,7 +162,7 @@ export function media(query:string, styles:Array<Object>) {
 
 /**
  * CSS Display property
- * @param opt Display option
+ * @param {'flex' | 'inline-flex' | 'block' | 'inline-block' | 'inline' | 'none'| 'grid' | 'inline-grid'} opt Display option
  */
 export function display(opt:'flex' | 'inline-flex' | 'block' | 'inline-block' | 'inline' | 'none'| 'grid' | 'inline-grid') {
     return {display: opt}
@@ -170,12 +170,12 @@ export function display(opt:'flex' | 'inline-flex' | 'block' | 'inline-block' | 
 
 /**
  * Apply padding to an element.
- * @param top Top padding (default: `0`)
- * @param right Right padding (default: `0`)
- * @param bottom Bottom padding (default: `0`)
- * @param left Left padding (default: `0`)
- * @param all Apply the same padding to all sides
- * @param auto Auto padding. Overrides other parameters (default: `false`)
+ * @param {UnitValue} top Top padding (default: `0`)
+ * @param {UnitValue} right Right padding (default: `0`)
+ * @param {UnitValue} bottom Bottom padding (default: `0`)
+ * @param {UnitValue} left Left padding (default: `0`)
+ * @param {UnitValue} all Apply the same padding to all sides
+ * @param {boolean} auto Auto padding. Overrides other parameters (default: `false`)
  */
 export function padding(opts:Partial<PaddingMargin>) {
     if(!opts) throw new ParameterError()
@@ -195,12 +195,12 @@ export function padding(opts:Partial<PaddingMargin>) {
 
 /**
  * Apply margin to an element.
- * @param top Top margin (default: `0`)
- * @param right Right margin (default: `0`)
- * @param bottom Bottom margin (default: `0`)
- * @param left Left margin (default: `0`)
- * @param all Apply the same margin to all sides
- * @param auto Auto margin. Overrides other parameters (default: `false`)
+ * @param {UnitValue} top Top margin (default: `0`)
+ * @param {UnitValue} right Right margin (default: `0`)
+ * @param {UnitValue} bottom Bottom margin (default: `0`)
+ * @param {UnitValue} left Left margin (default: `0`)
+ * @param {UnitValue} all Apply the same margin to all sides
+ * @param {boolean} auto Auto margin. Overrides other parameters (default: `false`)
  */
 export function margin(opts:Partial<PaddingMargin>) {
     if(!opts) throw new ParameterError()
@@ -220,9 +220,9 @@ export function margin(opts:Partial<PaddingMargin>) {
 
 /**
  * Set an elements Width. You can set the current, minimum, and maximum width.
- * @param min Minimum width
- * @param value Current width
- * @param max Maximum width
+ * @param {UnitValue} min Minimum width
+ * @param {UnitValue} value Current width
+ * @param {UnitValue} max Maximum width
  */
 export function width(opts:Partial<WidthHeight>) {
     let out = {};
@@ -234,9 +234,9 @@ export function width(opts:Partial<WidthHeight>) {
 
 /**
  * Set an elements Height. You can set the current, minimum, and maximum height.
- * @param min Minimum height
- * @param value Current height
- * @param max Maximum height
+ * @param {UnitValue} min Minimum height
+ * @param {UnitValue} value Current height
+ * @param {UnitValue} max Maximum height
  */
 export function height(opts:Partial<WidthHeight>) {
     let out = {};
@@ -248,11 +248,11 @@ export function height(opts:Partial<WidthHeight>) {
 
 /**
  * Create a new shadow.
- * @param hOffset The horizontal offset of the shadow
- * @param vOffset The vertical offset of the shadow
- * @param blur The blur distance
- * @param spread The spread of the shadow
- * @param color The color of the shadow
+ * @param {UnitValue} hOffset The horizontal offset of the shadow
+ * @param {UnitValue} vOffset The vertical offset of the shadow
+ * @param {UnitValue} blur The blur distance
+ * @param {UnitValue} spread The spread of the shadow
+ * @param {RGB | RGBA} color The color of the shadow
  */
 export function shadow(hOffset:UnitValue, vOffset:UnitValue, blur:UnitValue, spread:UnitValue, color:RGB) {
     return {'box-shadow': `${hOffset.v}${hOffset.u} ${vOffset.v}${vOffset.u} ${blur.v}${blur.u} ${spread.v}${spread.u} ${color}`}
@@ -260,7 +260,7 @@ export function shadow(hOffset:UnitValue, vOffset:UnitValue, blur:UnitValue, spr
 
 /**
  * How is the width/height of an element calculated.
- * @param value The value of this property ('content-box', 'border-box')
+ * @param {'content-box' | 'border-box'} value The value of this property ('content-box', 'border-box')
  */
 export function boxSizing(value:'content-box' | 'border-box') {
     return {'box-sizing': value}
@@ -268,7 +268,7 @@ export function boxSizing(value:'content-box' | 'border-box') {
 
 /**
  * Set the content property. Required for pseudo elements (::before / ::after).
- * @param value The value to set this property to
+ * @param {string} value The value to set this property to
  */
 export function content(value:string) {
     return {'content': value}
@@ -276,7 +276,7 @@ export function content(value:string) {
 
 /**
  * Set which curser should be displayed when hovering over an element.
- * @param value The value of this property ('auto' | 'default' | 'none' | 'context-menu' | 'help' | 'pointer' | 'progress' | 'wait' | 'cell' | 'crosshair' | 'text' | 'vertical-text' | 'alias' | 'copy' | 'move' | 'no-drop' | 'not-allowed' | 'e-resize' | 'n-resize' | 'ne-resize' | 'nw-resize' | 's-resize' | 'se-resize' | 'sw-resize' | 'w-resize' | 'ew-resize' | 'ns-resize' | 'nesw-resize' | 'nwse-resize' | 'col-resize' | 'row-resize' | 'all-scroll' | 'zoom-in' | 'zoom-out' | 'grab' | 'grabbing' | 'inherit')
+ * @param {'auto' | 'default' | 'none' | 'context-menu' | 'help' | 'pointer' | 'progress' | 'wait' | 'cell' | 'crosshair' | 'text' | 'vertical-text' | 'alias' | 'copy' | 'move' | 'no-drop' | 'not-allowed' | 'e-resize' | 'n-resize' | 'ne-resize' | 'nw-resize' | 's-resize' | 'se-resize' | 'sw-resize' | 'w-resize' | 'ew-resize' | 'ns-resize' | 'nesw-resize' | 'nwse-resize' | 'col-resize' | 'row-resize' | 'all-scroll' | 'zoom-in' | 'zoom-out' | 'grab' | 'grabbing' | 'inherit'} value The value of this property
  */
 export function cursor(value:'auto' | 'default' | 'none' | 'context-menu' | 'help' | 'pointer' | 'progress' | 'wait' | 'cell' | 'crosshair' | 'text' | 'vertical-text' | 'alias' | 'copy' | 'move' | 'no-drop' | 'not-allowed' | 'e-resize' | 'n-resize' | 'ne-resize' | 'nw-resize' | 's-resize' | 'se-resize' | 'sw-resize' | 'w-resize' | 'ew-resize' | 'ns-resize' | 'nesw-resize' | 'nwse-resize' | 'col-resize' | 'row-resize' | 'all-scroll' | 'zoom-in' | 'zoom-out' | 'grab' | 'grabbing' | 'inherit') {
     return {'cursor': value}
@@ -284,7 +284,7 @@ export function cursor(value:'auto' | 'default' | 'none' | 'context-menu' | 'hel
 
 /**
  * Set in what direction text is displayed.
- * @param value The value of this property ('ltr' | 'rtl')
+ * @param {'ltr' | 'rtl'} value The value of this property ('ltr' | 'rtl')
  */
 export function direction(value:'ltr' | 'rtl') {
     return {'direction': value}
@@ -292,7 +292,7 @@ export function direction(value:'ltr' | 'rtl') {
 
 /**
  * Set the opacity of an element
- * @param value The opacity value
+ * @param {number} value The opacity value
  */
 export function opacity(value:number) {
     return {'opacity': value}

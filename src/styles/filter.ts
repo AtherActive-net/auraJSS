@@ -3,7 +3,7 @@ import { UnitValue, UnitValueGrid, UnitValueRotation } from "../interfaces.js";
 
 /**
  * This functions checks if a UnitValue is only supplying a percentage. If it does not, throw an error.
- * @param val 
+ * @param {UnitValue} val The vlaue to check
  */
 function errorCheckUnit(val:UnitValue) {
      if(val.u != '%') throw new FunctionParamErorr('This function only support regular numbers and percentages.');
@@ -19,7 +19,7 @@ export function filter(filters:Array<Object>) {
 
 /**
  * [FILTER] Blur an element
- * @param val The amount to blur
+ * @param {UnitValue} val The amount to blur
  */
 export function blur(val:UnitValue) {
     return `blur(${val.v}${val.u})`;

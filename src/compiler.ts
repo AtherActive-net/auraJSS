@@ -4,9 +4,9 @@ import { CompilerOptions } from './interfaces.js';
 
 /**
  * Compile AuraJS stylesheets into CSS
- * @param input The input file. You can also directly specify a Stylesheet object.
- * @param outpath output file path
- * @param silent Define wether or not the compiler should log messages (default: true)
+ * @param {string | StyleSheet}input The input file. You can also directly specify a Stylesheet object.
+ * @param {string} outpath output file path
+ * @param {boolean} silent Define wether or not the compiler should log messages (default: true)
  * @returns A written file containing the generated CSS. It also returns the CSS string.
  */
 export async function compile(opts:CompilerOptions={input:undefined}) {
@@ -43,8 +43,8 @@ export async function compile(opts:CompilerOptions={input:undefined}) {
 
 /**
  * Loop over all styles, including nested ones.
- * @param styles Array containing styles / selectors
- * @param parent Optional parent selector. Do not set manually.
+ * @param {Array<Object>} styles Array containing styles / selectors
+ * @param {string} parent Optional parent selector. Do not set manually.
  * @returns CSS string
  */
 function loopStyles(styles:Array<any>, parent?:string) {
@@ -106,7 +106,7 @@ function loopStyles(styles:Array<any>, parent?:string) {
 
 /**
  * Check to see if the Stylesheet contains anything that is deemed invalid
- * @param styles Array containing styles / selectors
+ * @param {Array<Object>} styles Array containing styles / selectors
  */
 function errorCheckSheet(styles:Array<any>,parent=undefined) {
     let selectorFound = false;
@@ -126,7 +126,7 @@ function errorCheckSheet(styles:Array<any>,parent=undefined) {
 
 /**
  * A simple logging function. Just a wrapper for console.log.
- * @param msg Message to log
+ * @param {string} msg Message to log
  */
 function compilerLog(msg:string) {
     console.log(`[AuraJSS] ${msg}`)

@@ -3,8 +3,8 @@ import { GridGap, GridStartEnd, GridTemplate, UnitValueGrid } from "../interface
 /**
  * Define a grid template. All options can contain `string`, `unitValueGrid` or `number`(which defaults to `px`). This also automatically
  * sets display to `grid`.
- * @param colums Column template array.
- * @param rows Row template array.
+ * @param {Array<string|UnitValueGrid|number>} colums Column template array.
+ * @param {Array<string|UnitValueGrid|number>} rows Row template array.
  */
 export function gridTemplate(otps:GridTemplate) {
     let out = {}
@@ -16,8 +16,8 @@ export function gridTemplate(otps:GridTemplate) {
 
 /**
  * Define the start and end of a grid item in terms of rows.
- * @param {numer|'auto'} start The start of the item.
- * @param {numer|'auto'} end The end of the item.
+ * @param {number|'auto'} start The start of the item.
+ * @param {number|'auto'} end The end of the item.
  */
 export function gridRow(opts:GridStartEnd) {
     let out = {}
@@ -28,8 +28,8 @@ export function gridRow(opts:GridStartEnd) {
 
 /**
  * Define the start and end of a grid item in terms of columns.
- * @param {numer|'auto'} start The start of the item.
- * @param {numer|'auto'} end The end of the item.
+ * @param {number|'auto'} start The start of the item.
+ * @param {number|'auto'} end The end of the item.
  */
 export function gridColumn(opts:GridStartEnd) {
     let out = {}
@@ -52,7 +52,7 @@ export function gridGap(opt:GridGap) {
 
 /**
  * Convert an array for grid to something that is actually usable.
- * @param opts Input array of options
+ * @param {Array<string|UnitValueGrid|number>} opts Input array of options
  */
 function convertToString(opts:Array<string|UnitValueGrid|number>) {
     let str = '';
