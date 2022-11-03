@@ -26,8 +26,8 @@ export function animation(opts:Partial<Animation>) {
 
 /**
  * Create a new Animation.
- * @param name The name of the animation
- * @param keyframes Keyframes part of this animation
+ * @param {string} name The name of the animation
+ * @param {Array<Object>} keyframes Keyframes part of this animation
  */
 export function createAnimation(name:string,keyframes:Array<Object>) {
     return {name: name, keyframes: keyframes}
@@ -35,8 +35,8 @@ export function createAnimation(name:string,keyframes:Array<Object>) {
 
 /**
  * A keyframe inside an animation.
- * @param percent The percentage of the animation that should be complete
- * @param styles Array of styles to apply at this point in the animation
+ * @param {number} percent The percentage of the animation that should be complete
+ * @param {Array<Object>} styles Array of styles to apply at this point in the animation
  */
 export function keyframe(percent:number, styles:Array<Object>) {
     return {percent: percent, styles: styles}

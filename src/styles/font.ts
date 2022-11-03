@@ -2,11 +2,11 @@ import { FontOptions, UnitValue } from "../interfaces.js";
 
 /**
  * Set the font settings on an element
- * @param size The size of the font
- * @param family The font family
- * @param weight The font weight
- * @param style The font style
- * @param variant The font variant
+ * @param {UnitValue} size The size of the font
+ * @param {string} family The font family
+ * @param {'normal' | 'bold' | 'bolder' | 'lighter' | number} weight The font weight
+ * @param {'normal' | 'italic' | 'oblique'} style The font style
+ * @param {'normal' | 'small-caps'} variant The font variant
  */
 export function font(opts:FontOptions) {
     let out = {};
@@ -21,7 +21,7 @@ export function font(opts:FontOptions) {
 
 /**
  * Set the line height of an element
- * @param val The line height
+ * @param {UnitValue} val The line height
  */
 export function lineHeight(val:UnitValue) {
     return { 'line-height': `${val.v}${val.u}` };

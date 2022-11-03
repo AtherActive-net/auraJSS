@@ -20,6 +20,10 @@ export class RGB extends Style {
     }
 }
 
+/**
+ * A simple RGBA color class.
+ * This class extends RGB and is fully compatible with any field using RGB.
+ */
 export class RGBA extends RGB {
     public a: number
 
@@ -39,7 +43,7 @@ export class RGBA extends RGB {
 
 /**
  * Apply a color to text.
- * @param color A color to apply to text
+ * @param {RGB | RGBA} color A color to apply to text
  */
 export function color(color:RGB|RGBA) {
     return {color}
@@ -47,7 +51,7 @@ export function color(color:RGB|RGBA) {
 
 /**
  * Apply a color to the background
- * @param color A color to apply to the background
+ * @param {RGB | RGBA} color A color to apply to the background
  */
 export function backgroundColor(color:RGB|RGBA) {
     return {"background-color": color.toString()}

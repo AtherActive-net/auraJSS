@@ -16,8 +16,8 @@ export const defaultBreakPoints = {
 /**
  * Generate a Grid system using Flexbox.
  * Generates `.col`, `.row` `.container` classes.
- * @param divisionCount The number of divisions in the grid (default: `12`)
- * @param breakpoints The breakpoints to use in the grid. (default: `{xs: 300, s: 576, m: 768, l: 992, xl: 1200, xxl: 1400}`)
+ * @param {number} divisionCount The number of divisions in the grid (default: `12`)
+ * @param {Object} breakpoints The breakpoints to use in the grid. (default: `{xs: 300, s: 576, m: 768, l: 992, xl: 1200, xxl: 1400}`)
  */
 export function generateGridSystem(divisionCount:number, breakpoints:Object=defaultBreakPoints) {
     let out = [];
@@ -90,7 +90,7 @@ function generateContainers(breakpoints:Object=defaultBreakPoints, divisions:num
 
 /**
  * Generate color classes automatically. These classes will look like this: `.color-[color]`
- * @param colors The object of colors to generate classes for. It should be noted that only a key:value pair of the RGB class is supported.
+ * @param {Object} colors The object of colors to generate classes for. It should be noted that only a key:value pair of the RGB class is supported.
  */
 export function generateColorClasses(colors:Object) {
     let out = [];
@@ -104,7 +104,7 @@ export function generateColorClasses(colors:Object) {
 
 /**
  * Generate Background Color classes automatically. These classes will look like this: `.bg-[color]`
- * @param colors The object of colors to generate classes for. It should be noted that only a key:value pair of the RGB class is supported.
+ * @param {Object} colors The object of colors to generate classes for. It should be noted that only a key:value pair of the RGB class is supported.
  */
  export function generateBackgroundColorClasses(colors:Object) {
     let out = [];
