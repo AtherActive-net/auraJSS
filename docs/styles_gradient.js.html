@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: styles/font.js</title>
+    <title>JSDoc: Source: styles/gradient.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: styles/font.js</h1>
+    <h1 class="page-title">Source: styles/gradient.js</h1>
 
     
 
@@ -26,34 +26,38 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Set the font settings on an element
- * @param {UnitValue} size The size of the font
- * @param {string} family The font family
- * @param {'normal' | 'bold' | 'bolder' | 'lighter' | number} weight The font weight
- * @param {'normal' | 'italic' | 'oblique'} style The font style
- * @param {'normal' | 'small-caps'} variant The font variant
+            <pre class="prettyprint source linenums"><code>import { Style } from "../baseclasses.js";
+/**
+ * The Key class is used to define a key inside a gradient.
  */
-export function font(opts) {
-    let out = {};
-    if (opts.size)
-        out['font-size'] = `${opts.size.v}${opts.size.u}`;
-    if (opts.family)
-        out['font-family'] = opts.family;
-    if (opts.weight)
-        out['font-weight'] = opts.weight;
-    if (opts.style)
-        out['font-style'] = opts.style;
-    if (opts.variant)
-        out['font-variant'] = opts.variant;
-    return out;
+class Key extends Style {
+    constructor(percentage, color) {
+        super();
+        this.color = color;
+        this.percentage = percentage;
+    }
+    toString() {
+        return `${this.color.toString()} ${this.percentage}%`;
+    }
 }
 /**
- * Set the line height of an element
- * @param {UnitValue} val The line height
+ * Apply a gradient ot an element. Automatically applies it to `baclground-image`.
+ * @param {'linear' | 'radial'}type The type of gradient to apply
+ * @param {Array&lt;Key>} keys Percentages and colors to use in the gradient
+ * @param {UnitValueRotation} angle The angle to use for the gradient (Only for linear gradients)
  */
-export function lineHeight(val) {
-    return { 'line-height': `${val.v}${val.u}` };
+export function gradient(type, keys, angle) {
+    if (type == 'linear')
+        return { 'background-image': `linear-gradient(${angle.v}${angle.u}, ${keys.join(',')})` };
+    return { 'background-image': `${type}-gradient(${keys.join(', ')})` };
+}
+/**
+ * Add a key to a gradient.
+ * @param {number} percent The percentage to use for the key
+ * @param {RGB | RGBA} color The color to use for the key
+ */
+export function key(percent, color) {
+    return new Key(percent, color);
 }
 </code></pre>
         </article>

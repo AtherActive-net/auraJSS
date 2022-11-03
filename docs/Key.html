@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: styles/font.js</title>
+    <title>JSDoc: Class: Key</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,47 +17,137 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: styles/font.js</h1>
+    <h1 class="page-title">Class: Key</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Set the font settings on an element
- * @param {UnitValue} size The size of the font
- * @param {string} family The font family
- * @param {'normal' | 'bold' | 'bolder' | 'lighter' | number} weight The font weight
- * @param {'normal' | 'italic' | 'oblique'} style The font style
- * @param {'normal' | 'small-caps'} variant The font variant
- */
-export function font(opts) {
-    let out = {};
-    if (opts.size)
-        out['font-size'] = `${opts.size.v}${opts.size.u}`;
-    if (opts.family)
-        out['font-family'] = opts.family;
-    if (opts.weight)
-        out['font-weight'] = opts.weight;
-    if (opts.style)
-        out['font-style'] = opts.style;
-    if (opts.variant)
-        out['font-variant'] = opts.variant;
-    return out;
-}
-/**
- * Set the line height of an element
- * @param {UnitValue} val The line height
- */
-export function lineHeight(val) {
-    return { 'line-height': `${val.v}${val.u}` };
-}
-</code></pre>
-        </article>
-    </section>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Key<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">The Key class is used to define a key inside a gradient.</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="Key"><span class="type-signature"></span>new Key<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="styles_gradient.js.html">styles/gradient.js</a>, <a href="styles_gradient.js.html#line5">line 5</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
