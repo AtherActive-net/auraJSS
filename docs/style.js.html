@@ -77,27 +77,27 @@ export function selector(selector, style) {
 }
 /**
  * Create a new media query.
- * @param query The query. For example: `only screen and (min-width: 768px)`
- * @param styles Styles/selctors which will be part of this media query
+ * @param {string} query The query. For example: `only screen and (min-width: 768px)`
+ * @param {Array&lt;Object>} styles Styles/selctors which will be part of this media query
  */
 export function media(query, styles) {
     return { media: query, styles: styles };
 }
 /**
  * CSS Display property
- * @param opt Display option
+ * @param {'flex' | 'inline-flex' | 'block' | 'inline-block' | 'inline' | 'none'| 'grid' | 'inline-grid'} opt Display option
  */
 export function display(opt) {
     return { display: opt };
 }
 /**
  * Apply padding to an element.
- * @param top Top padding (default: `0`)
- * @param right Right padding (default: `0`)
- * @param bottom Bottom padding (default: `0`)
- * @param left Left padding (default: `0`)
- * @param all Apply the same padding to all sides
- * @param auto Auto padding. Overrides other parameters (default: `false`)
+ * @param {UnitValue} top Top padding (default: `0`)
+ * @param {UnitValue} right Right padding (default: `0`)
+ * @param {UnitValue} bottom Bottom padding (default: `0`)
+ * @param {UnitValue} left Left padding (default: `0`)
+ * @param {UnitValue} all Apply the same padding to all sides
+ * @param {boolean} auto Auto padding. Overrides other parameters (default: `false`)
  */
 export function padding(opts) {
     if (!opts)
@@ -120,12 +120,12 @@ export function padding(opts) {
 }
 /**
  * Apply margin to an element.
- * @param top Top margin (default: `0`)
- * @param right Right margin (default: `0`)
- * @param bottom Bottom margin (default: `0`)
- * @param left Left margin (default: `0`)
- * @param all Apply the same margin to all sides
- * @param auto Auto margin. Overrides other parameters (default: `false`)
+ * @param {UnitValue} top Top margin (default: `0`)
+ * @param {UnitValue} right Right margin (default: `0`)
+ * @param {UnitValue} bottom Bottom margin (default: `0`)
+ * @param {UnitValue} left Left margin (default: `0`)
+ * @param {UnitValue} all Apply the same margin to all sides
+ * @param {boolean} auto Auto margin. Overrides other parameters (default: `false`)
  */
 export function margin(opts) {
     if (!opts)
@@ -148,9 +148,9 @@ export function margin(opts) {
 }
 /**
  * Set an elements Width. You can set the current, minimum, and maximum width.
- * @param min Minimum width
- * @param value Current width
- * @param max Maximum width
+ * @param {UnitValue} min Minimum width
+ * @param {UnitValue} value Current width
+ * @param {UnitValue} max Maximum width
  */
 export function width(opts) {
     let out = {};
@@ -164,9 +164,9 @@ export function width(opts) {
 }
 /**
  * Set an elements Height. You can set the current, minimum, and maximum height.
- * @param min Minimum height
- * @param value Current height
- * @param max Maximum height
+ * @param {UnitValue} min Minimum height
+ * @param {UnitValue} value Current height
+ * @param {UnitValue} max Maximum height
  */
 export function height(opts) {
     let out = {};
@@ -180,46 +180,46 @@ export function height(opts) {
 }
 /**
  * Create a new shadow.
- * @param hOffset The horizontal offset of the shadow
- * @param vOffset The vertical offset of the shadow
- * @param blur The blur distance
- * @param spread The spread of the shadow
- * @param color The color of the shadow
+ * @param {UnitValue} hOffset The horizontal offset of the shadow
+ * @param {UnitValue} vOffset The vertical offset of the shadow
+ * @param {UnitValue} blur The blur distance
+ * @param {UnitValue} spread The spread of the shadow
+ * @param {RGB | RGBA} color The color of the shadow
  */
 export function shadow(hOffset, vOffset, blur, spread, color) {
     return { 'box-shadow': `${hOffset.v}${hOffset.u} ${vOffset.v}${vOffset.u} ${blur.v}${blur.u} ${spread.v}${spread.u} ${color}` };
 }
 /**
  * How is the width/height of an element calculated.
- * @param value The value of this property ('content-box', 'border-box')
+ * @param {'content-box' | 'border-box'} value The value of this property ('content-box', 'border-box')
  */
 export function boxSizing(value) {
     return { 'box-sizing': value };
 }
 /**
  * Set the content property. Required for pseudo elements (::before / ::after).
- * @param value The value to set this property to
+ * @param {string} value The value to set this property to
  */
 export function content(value) {
     return { 'content': value };
 }
 /**
  * Set which curser should be displayed when hovering over an element.
- * @param value The value of this property ('auto' | 'default' | 'none' | 'context-menu' | 'help' | 'pointer' | 'progress' | 'wait' | 'cell' | 'crosshair' | 'text' | 'vertical-text' | 'alias' | 'copy' | 'move' | 'no-drop' | 'not-allowed' | 'e-resize' | 'n-resize' | 'ne-resize' | 'nw-resize' | 's-resize' | 'se-resize' | 'sw-resize' | 'w-resize' | 'ew-resize' | 'ns-resize' | 'nesw-resize' | 'nwse-resize' | 'col-resize' | 'row-resize' | 'all-scroll' | 'zoom-in' | 'zoom-out' | 'grab' | 'grabbing' | 'inherit')
+ * @param {'auto' | 'default' | 'none' | 'context-menu' | 'help' | 'pointer' | 'progress' | 'wait' | 'cell' | 'crosshair' | 'text' | 'vertical-text' | 'alias' | 'copy' | 'move' | 'no-drop' | 'not-allowed' | 'e-resize' | 'n-resize' | 'ne-resize' | 'nw-resize' | 's-resize' | 'se-resize' | 'sw-resize' | 'w-resize' | 'ew-resize' | 'ns-resize' | 'nesw-resize' | 'nwse-resize' | 'col-resize' | 'row-resize' | 'all-scroll' | 'zoom-in' | 'zoom-out' | 'grab' | 'grabbing' | 'inherit'} value The value of this property
  */
 export function cursor(value) {
     return { 'cursor': value };
 }
 /**
  * Set in what direction text is displayed.
- * @param value The value of this property ('ltr' | 'rtl')
+ * @param {'ltr' | 'rtl'} value The value of this property ('ltr' | 'rtl')
  */
 export function direction(value) {
     return { 'direction': value };
 }
 /**
  * Set the opacity of an element
- * @param value The opacity value
+ * @param {number} value The opacity value
  */
 export function opacity(value) {
     return { 'opacity': value };
@@ -234,13 +234,13 @@ export function opacity(value) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="RGB.html">RGB</a></li><li><a href="StyleSheet.html">StyleSheet</a></li></ul><h3>Global</h3><ul><li><a href="global.html#animation">animation</a></li><li><a href="global.html#backgrondPosition">backgrondPosition</a></li><li><a href="global.html#backgroundAttachment">backgroundAttachment</a></li><li><a href="global.html#backgroundClip">backgroundClip</a></li><li><a href="global.html#backgroundColor">backgroundColor</a></li><li><a href="global.html#backgroundImage">backgroundImage</a></li><li><a href="global.html#backgroundOrigin">backgroundOrigin</a></li><li><a href="global.html#backgroundRepeat">backgroundRepeat</a></li><li><a href="global.html#backgroundSize">backgroundSize</a></li><li><a href="global.html#blur">blur</a></li><li><a href="global.html#border">border</a></li><li><a href="global.html#borderBottom">borderBottom</a></li><li><a href="global.html#borderCollapse">borderCollapse</a></li><li><a href="global.html#borderImage">borderImage</a></li><li><a href="global.html#borderLeft">borderLeft</a></li><li><a href="global.html#borderRadius">borderRadius</a></li><li><a href="global.html#borderRight">borderRight</a></li><li><a href="global.html#borderTop">borderTop</a></li><li><a href="global.html#bottom">bottom</a></li><li><a href="global.html#boxSizing">boxSizing</a></li><li><a href="global.html#brightness">brightness</a></li><li><a href="global.html#color">color</a></li><li><a href="global.html#compile">compile</a></li><li><a href="global.html#compilerLog">compilerLog</a></li><li><a href="global.html#content">content</a></li><li><a href="global.html#contrast">contrast</a></li><li><a href="global.html#convertToString">convertToString</a></li><li><a href="global.html#createAnimation">createAnimation</a></li><li><a href="global.html#cursor">cursor</a></li><li><a href="global.html#deg">deg</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#display">display</a></li><li><a href="global.html#em">em</a></li><li><a href="global.html#errorCheckSheet">errorCheckSheet</a></li><li><a href="global.html#errorCheckUnit">errorCheckUnit</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#flex">flex</a></li><li><a href="global.html#flexDirection">flexDirection</a></li><li><a href="global.html#flexWrap">flexWrap</a></li><li><a href="global.html#font">font</a></li><li><a href="global.html#fr">fr</a></li><li><a href="global.html#generateBackgroundColorClasses">generateBackgroundColorClasses</a></li><li><a href="global.html#generateColorClasses">generateColorClasses</a></li><li><a href="global.html#generateGridSystem">generateGridSystem</a></li><li><a href="global.html#grad">grad</a></li><li><a href="global.html#grayscale">grayscale</a></li><li><a href="global.html#gridColumn">gridColumn</a></li><li><a href="global.html#gridGap">gridGap</a></li><li><a href="global.html#gridRow">gridRow</a></li><li><a href="global.html#gridTemplate">gridTemplate</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#hueRotate">hueRotate</a></li><li><a href="global.html#include">include</a></li><li><a href="global.html#invert">invert</a></li><li><a href="global.html#keyframe">keyframe</a></li><li><a href="global.html#left">left</a></li><li><a href="global.html#lineHeight">lineHeight</a></li><li><a href="global.html#listStyle">listStyle</a></li><li><a href="global.html#loopCounter">loopCounter</a></li><li><a href="global.html#loopResolve">loopResolve</a></li><li><a href="global.html#loopStyles">loopStyles</a></li><li><a href="global.html#margin">margin</a></li><li><a href="global.html#media">media</a></li><li><a href="global.html#objectFit">objectFit</a></li><li><a href="global.html#opacity">opacity</a></li><li><a href="global.html#padding">padding</a></li><li><a href="global.html#percent">percent</a></li><li><a href="global.html#px">px</a></li><li><a href="global.html#rad">rad</a></li><li><a href="global.html#rem">rem</a></li><li><a href="global.html#right">right</a></li><li><a href="global.html#rotate">rotate</a></li><li><a href="global.html#rotate3D">rotate3D</a></li><li><a href="global.html#s">s</a></li><li><a href="global.html#saturate">saturate</a></li><li><a href="global.html#scale">scale</a></li><li><a href="global.html#sepia">sepia</a></li><li><a href="global.html#shadow">shadow</a></li><li><a href="global.html#skew">skew</a></li><li><a href="global.html#top">top</a></li><li><a href="global.html#transform">transform</a></li><li><a href="global.html#transition">transition</a></li><li><a href="global.html#translate">translate</a></li><li><a href="global.html#turn">turn</a></li><li><a href="global.html#vh">vh</a></li><li><a href="global.html#vmax">vmax</a></li><li><a href="global.html#vmin">vmin</a></li><li><a href="global.html#vw">vw</a></li><li><a href="global.html#width">width</a></li><li><a href="global.html#zIndex">zIndex</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Key.html">Key</a></li><li><a href="RGB.html">RGB</a></li><li><a href="RGBA.html">RGBA</a></li><li><a href="StyleSheet.html">StyleSheet</a></li></ul><h3>Global</h3><ul><li><a href="global.html#animation">animation</a></li><li><a href="global.html#backgrondPosition">backgrondPosition</a></li><li><a href="global.html#backgroundAttachment">backgroundAttachment</a></li><li><a href="global.html#backgroundClip">backgroundClip</a></li><li><a href="global.html#backgroundColor">backgroundColor</a></li><li><a href="global.html#backgroundImage">backgroundImage</a></li><li><a href="global.html#backgroundOrigin">backgroundOrigin</a></li><li><a href="global.html#backgroundRepeat">backgroundRepeat</a></li><li><a href="global.html#backgroundSize">backgroundSize</a></li><li><a href="global.html#blur">blur</a></li><li><a href="global.html#border">border</a></li><li><a href="global.html#borderBottom">borderBottom</a></li><li><a href="global.html#borderCollapse">borderCollapse</a></li><li><a href="global.html#borderImage">borderImage</a></li><li><a href="global.html#borderLeft">borderLeft</a></li><li><a href="global.html#borderRadius">borderRadius</a></li><li><a href="global.html#borderRight">borderRight</a></li><li><a href="global.html#borderTop">borderTop</a></li><li><a href="global.html#bottom">bottom</a></li><li><a href="global.html#boxSizing">boxSizing</a></li><li><a href="global.html#brightness">brightness</a></li><li><a href="global.html#color">color</a></li><li><a href="global.html#compile">compile</a></li><li><a href="global.html#compilerLog">compilerLog</a></li><li><a href="global.html#content">content</a></li><li><a href="global.html#contrast">contrast</a></li><li><a href="global.html#convertToString">convertToString</a></li><li><a href="global.html#createAnimation">createAnimation</a></li><li><a href="global.html#cursor">cursor</a></li><li><a href="global.html#deg">deg</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#display">display</a></li><li><a href="global.html#em">em</a></li><li><a href="global.html#errorCheckSheet">errorCheckSheet</a></li><li><a href="global.html#errorCheckUnit">errorCheckUnit</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#flex">flex</a></li><li><a href="global.html#flexDirection">flexDirection</a></li><li><a href="global.html#flexWrap">flexWrap</a></li><li><a href="global.html#font">font</a></li><li><a href="global.html#fr">fr</a></li><li><a href="global.html#generateBackgroundColorClasses">generateBackgroundColorClasses</a></li><li><a href="global.html#generateColorClasses">generateColorClasses</a></li><li><a href="global.html#generateGridSystem">generateGridSystem</a></li><li><a href="global.html#grad">grad</a></li><li><a href="global.html#gradient">gradient</a></li><li><a href="global.html#grayscale">grayscale</a></li><li><a href="global.html#gridColumn">gridColumn</a></li><li><a href="global.html#gridGap">gridGap</a></li><li><a href="global.html#gridRow">gridRow</a></li><li><a href="global.html#gridTemplate">gridTemplate</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#hueRotate">hueRotate</a></li><li><a href="global.html#include">include</a></li><li><a href="global.html#invert">invert</a></li><li><a href="global.html#key">key</a></li><li><a href="global.html#keyframe">keyframe</a></li><li><a href="global.html#left">left</a></li><li><a href="global.html#lineHeight">lineHeight</a></li><li><a href="global.html#listStyle">listStyle</a></li><li><a href="global.html#loopCounter">loopCounter</a></li><li><a href="global.html#loopResolve">loopResolve</a></li><li><a href="global.html#loopStyles">loopStyles</a></li><li><a href="global.html#margin">margin</a></li><li><a href="global.html#media">media</a></li><li><a href="global.html#objectFit">objectFit</a></li><li><a href="global.html#opacity">opacity</a></li><li><a href="global.html#padding">padding</a></li><li><a href="global.html#percent">percent</a></li><li><a href="global.html#position">position</a></li><li><a href="global.html#px">px</a></li><li><a href="global.html#rad">rad</a></li><li><a href="global.html#rem">rem</a></li><li><a href="global.html#right">right</a></li><li><a href="global.html#rotate">rotate</a></li><li><a href="global.html#rotate3D">rotate3D</a></li><li><a href="global.html#s">s</a></li><li><a href="global.html#saturate">saturate</a></li><li><a href="global.html#scale">scale</a></li><li><a href="global.html#sepia">sepia</a></li><li><a href="global.html#shadow">shadow</a></li><li><a href="global.html#skew">skew</a></li><li><a href="global.html#top">top</a></li><li><a href="global.html#transform">transform</a></li><li><a href="global.html#transition">transition</a></li><li><a href="global.html#translate">translate</a></li><li><a href="global.html#turn">turn</a></li><li><a href="global.html#vh">vh</a></li><li><a href="global.html#vmax">vmax</a></li><li><a href="global.html#vmin">vmin</a></li><li><a href="global.html#vw">vw</a></li><li><a href="global.html#width">width</a></li><li><a href="global.html#zIndex">zIndex</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Nov 03 2022 14:24:20 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Nov 03 2022 14:42:06 GMT+0100 (Central European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
