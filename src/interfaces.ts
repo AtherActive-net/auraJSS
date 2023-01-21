@@ -26,9 +26,9 @@ export interface UnitValueGrid{
 }
 
 export interface WidthHeight {
-    min?: UnitValue,
-    max?: UnitValue,
-    current?: UnitValue,
+    min?: UnitValue|'min-content'|'max-content'|'fit-content'|'auto',
+    max?: UnitValue|'min-content'|'max-content'|'fit-content'|'auto',
+    current?: UnitValue|'min-content'|'max-content'|'fit-content'|'auto',
 }
 
 export interface CompilerOptions {
@@ -90,8 +90,8 @@ export interface Keyframe {
 }
 
 export interface GridTemplate {
-    rows?: Array<string|UnitValueGrid|number>,
-    columns?: Array<string|UnitValueGrid|number>,
+    rows?: Array<string|UnitValueGrid|number|'min-content'|'max-content'>,
+    columns?: Array<string|UnitValueGrid|number|'min-content'|'max-content'>,
 }
 
 export interface GridStartEnd {

@@ -218,6 +218,11 @@ export function margin(opts:Partial<PaddingMargin>) {
     return {"margin": `${opts.top.v}${opts.top.u} ${opts.right.v}${opts.right.u} ${opts.bottom.v}${opts.bottom.u} ${opts.left.v}${opts.left.u}`}
 }
 
+function generateString(value:UnitValue|string) {
+    if(typeof value === 'string') return `${value}`
+    return `${value.v}${value.u}`
+}
+
 /**
  * Set an elements Width. You can set the current, minimum, and maximum width.
  * @param {UnitValue} min Minimum width
@@ -226,9 +231,9 @@ export function margin(opts:Partial<PaddingMargin>) {
  */
 export function width(opts:Partial<WidthHeight>) {
     let out = {};
-    if(opts.min) out['min-width'] = `${opts.min.v}${opts.min.u}`;
-    if(opts.max) out['max-width'] = `${opts.max.v}${opts.max.u}`;
-    if(opts.current) out['width'] = `${opts.current.v}${opts.current.u}`;
+    if(opts.min) out['min-width'] = generateString(opts.min);
+    if(opts.max) out['max-width'] = generateString(opts.max);
+    if(opts.current) out['width'] = generateString(opts.current);
     return out;
 }
 
@@ -240,9 +245,9 @@ export function width(opts:Partial<WidthHeight>) {
  */
 export function height(opts:Partial<WidthHeight>) {
     let out = {};
-    if(opts.min) out['min-height'] = `${opts.min.v}${opts.min.u}`;
-    if(opts.max) out['max-height'] = `${opts.max.v}${opts.max.u}`;
-    if(opts.current) out['height'] = `${opts.current.v}${opts.current.u}`;
+    if(opts.min) out['min-height'] = generateString(opts.min);
+    if(opts.max) out['max-height'] = generateString(opts.max);
+    if(opts.current) out['height'] = generateString(opts.current);
     return out;
 }
 
