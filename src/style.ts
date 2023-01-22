@@ -10,7 +10,7 @@ export {StyleSheet} from "./stylesheet.js"
 export * as builtin from "./builtin.js"
 
 // Styles imported from the /styles folder
-export { unit, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr, deg, rad, turn, grad } from "./util.js"
+export { unit, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr, deg, rad, turn, grad, scssVar } from "./util.js"
 export { RGB, RGBA, color, backgroundColor } from "./styles/color.js"
 export { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize} from "./styles/background.js"
 export { position, top, left, right, bottom, zIndex, objectFit } from "./styles/position.js"
@@ -305,6 +305,6 @@ export function direction(value:'ltr' | 'rtl') {
  * Set the opacity of an element
  * @param {number} value The opacity value
  */
-export function opacity(value:number) {
+export function opacity(value:number):any {
     return {'opacity': value}
 }

@@ -2,6 +2,8 @@ import { StyleError, CompileError } from './error.js';
 import fs from 'fs';
 import { CompilerOptions } from './interfaces.js';
 
+let options:CompilerOptions;
+
 /**
  * Compile AuraJS stylesheets into CSS
  * @param {string | StyleSheet}input The input file. You can also directly specify a Stylesheet object.
@@ -21,9 +23,12 @@ export async function compile(opts:CompilerOptions={input:undefined}) {
         styleSheet = opts.input;
     }
 
+    options = opts;
+
     if(!styleSheet) throw new CompileError('No default export found in stylesheet. This must be set to a StyleSheet object.');
     
     if(!opts.silent) compilerLog(`Starting compilation of '${opts.input}'`);
+    if(!opts.silent && opts.scssCompatible) compilerLog(`SCSS compatibility mode is enabled.`)
 
     // Check if there are any obvious errors in the stylesheet.
     errorCheckSheet(styleSheet.styles);
@@ -94,6 +99,11 @@ function loopStyles(styles:Array<any>, parent?:string) {
         // If it is none of the above, it is a style.
         else {
             addedCSS += Object.keys(style).map((key,i) => {
+                if(typeof Object.values(style)[i] == 'string') {
+                    if((Object.values(style)[i] as string).startsWith('$') && !options.scssCompatible) {
+                        throw new CompileError("Found a Scss variable while Scss support is disabled. You can enable it by setting the 'ScssCompatible' option to true.")
+                    }
+                }
                 return `${key}: ${Object.values(style)[i]};`
             }).join('');
 
@@ -110,6 +120,13 @@ function loopStyles(styles:Array<any>, parent?:string) {
  */
 function errorCheckSheet(styles:Array<any>,parent=undefined) {
     let selectorFound = false;
+
+    if(options.scssCompatible) {
+        if(!options.outpath.includes('.scss')) {
+            throw new CompileError("Scss support is enabled, but the output file does not have the '.scss' extension. This is required for Scss support to work.")
+        }
+    }
+
     styles.forEach(style => {
         if(style.selector) {
             selectorFound = true;

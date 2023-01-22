@@ -124,3 +124,7 @@ export function rad(value:number): UnitValueRotation {
 export function turn(value:number): UnitValueRotation {
     return {u:'turn', v:value}
 }
+
+export function scssVar(name:string):any {
+    return `$${name}`
+}

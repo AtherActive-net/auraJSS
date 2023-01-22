@@ -36,6 +36,7 @@ export interface CompilerOptions {
     outpath?: string,
     silent?: boolean,
     removeEmptySelectors?: boolean,
+    scssCompatible?: boolean
 }
 
 export interface FlexOptions {
