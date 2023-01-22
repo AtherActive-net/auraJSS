@@ -125,6 +125,12 @@ export function turn(value:number): UnitValueRotation {
     return {u:'turn', v:value}
 }
 
+/**
+ * Allows the use of a SCSS variable in a stylesheet.
+ * Please note that this does mean that type checking is lost when using this function.
+ * This will be done by the SCSS compiler instead.
+ * @param {string} name The name of the variable
+ */
 export function scssVar(name:string):any {
     return `$${name}`
 }

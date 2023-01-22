@@ -1,5 +1,16 @@
 import { Text } from "interfaces";
 
+
+/**
+ * Allows setting of several text-related properties at once.
+ * @param {'left' | 'right' | 'center' | 'justify' | 'justify-all' | 'start' | 'end' | 'match-parent'} align Allows you to set text alignment.
+ * @param {UnitValue} indent Sets the indentation of the first line of text.
+ * @param {'none' | 'capitalize' | 'uppercase' | 'lowercase' | 'full-width' | 'full-size-kana'} transform Allows you to set text transformation.
+ * @param {TextDecoration | "none"} decoration Set the decoration of the text, or none.
+ * @param {TextEmphasis} emphasis Set the emphasis of the text.
+ * @param {'mixed' | 'upright' | 'sideways'} orientation Set the orientation of the text.
+ * @returns 
+ */
 export function text(opts:Partial<Text>) {
     let out = {};
     if(opts.align) out['text-align'] = opts.align;
