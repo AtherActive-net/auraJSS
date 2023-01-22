@@ -67,7 +67,7 @@ function loopStyles(styles:Array<any>, parent?:string) {
                 addedCSS += '}'
                 closed = true;
             }
-            addedCSS += `${style.selector} {`;
+            addedCSS += `${style.selector}{`;
             addedCSS += loopStyles(style.style, style.selector);
             if(!closed) addedCSS += '}';
         } 
@@ -104,7 +104,7 @@ function loopStyles(styles:Array<any>, parent?:string) {
                         throw new CompileError("Found a Scss variable while Scss support is disabled. You can enable it by setting the 'ScssCompatible' option to true.")
                     }
                 }
-                return `${key}: ${Object.values(style)[i]};`
+                return `${key}:${Object.values(style)[i]};`
             }).join('');
 
 
