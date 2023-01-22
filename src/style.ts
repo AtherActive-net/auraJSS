@@ -1,133 +1,139 @@
-import { PaddingMargin, UnitValue, UnitValueGrid, WidthHeight } from "./interfaces.js"
 import { ParameterError } from "./error.js"
+import { PaddingMargin, UnitValue, WidthHeight } from "./interfaces.js"
+
+export { PaddingMargin, UnitValue, UnitValueGrid, WidthHeight } from "./interfaces.js"
+export { ParameterError } from "./error.js"
 
 // Basic exports
-import { compile } from "./compiler.js"
-import Stylesheet from "./stylesheet.js"
-import * as builtin from "./builtin.js"
+export { compile } from "./compiler.js"
+export {StyleSheet} from "./stylesheet.js"
+export * as builtin from "./builtin.js"
 
 // Styles imported from the /styles folder
-import { unit, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr, deg, rad, turn, grad } from "./util.js"
-import { RGB, RGBA, color, backgroundColor } from "./styles/color.js"
-import { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize} from "./styles/background.js"
-import { position, top, left, right, bottom, zIndex, objectFit } from "./styles/position.js"
-import { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js"
-import { transform, translate, rotate, rotate3D, skew, scale} from "./styles/transform.js"
-import { animation, keyframe, createAnimation, transition } from "./styles/animation.js"
-import { filter, blur, brightness, contrast, grayscale, hueRotate, invert, opacity as opacityFilter, saturate, sepia} from "./styles/filter.js"
-import { gridTemplate, gridColumn, gridGap, gridRow } from "./styles/grid.js"
-import {gradient, key} from "./styles/gradient.js"
-import { flex } from "./styles/flex.js"
-import { font, lineHeight } from "./styles/font.js"
-import { listStyle } from "./styles/list.js"
+export { unit, include, rem, px, em, vh, vw, vmin, vmax, percent, s, fr, deg, rad, turn, grad } from "./util.js"
+export { RGB, RGBA, color, backgroundColor } from "./styles/color.js"
+export { backgrondPosition, backgroundAttachment, backgroundClip, backgroundImage, backgroundOrigin, backgroundRepeat, backgroundSize} from "./styles/background.js"
+export { position, top, left, right, bottom, zIndex, objectFit } from "./styles/position.js"
+export { border, borderBottom, borderTop, borderLeft, borderRight, borderCollapse, borderRadius, borderImage } from "./styles/border.js"
+export { transform, translate, rotate, rotate3D, skew, scale} from "./styles/transform.js"
+export { animation, keyframe, createAnimation, transition } from "./styles/animation.js"
+export { filter, blur, brightness, contrast, grayscale, hueRotate, invert, opacity as opacityFilter, saturate, sepia} from "./styles/filter.js"
+export { gridTemplate, gridColumn, gridGap, gridRow } from "./styles/grid.js"
+export {gradient, key} from "./styles/gradient.js"
+export { flex } from "./styles/flex.js"
+export { font, lineHeight } from "./styles/font.js"
+export { listStyle } from "./styles/list.js"
+export {text} from "./styles/text.js"
 
-export {
-    // basic
-    Stylesheet,
-    compile,
-    builtin,
+import { RGB } from "./styles/color.js"
 
-    // other
-    unit,
-    include,
-    UnitValueGrid,
-    UnitValue,
-    rem,
-    px,
-    em,
-    vh,
-    vw,
-    vmin,
-    vmax,
-    percent,
-    s,
-    fr,
-    deg,
-    rad,
-    turn,
-    grad,
+// export {
+//     // basic
+//     Stylesheet,
+//     compile,
+//     builtin,
+
+//     // other
+//     unit,
+//     include,
+//     UnitValueGrid,
+//     UnitValue,
+//     rem,
+//     px,
+//     em,
+//     vh,
+//     vw,
+//     vmin,
+//     vmax,
+//     percent,
+//     s,
+//     fr,
+//     deg,
+//     rad,
+//     turn,
+//     grad,
     
-    // Color
-    RGB,
-    RGBA,
-    color,
-    backgroundColor,
+//     // Color
+//     RGB,
+//     RGBA,
+//     color,
+//     backgroundColor,
 
-    // Background
-    backgrondPosition,
-    backgroundAttachment,
-    backgroundClip,
-    backgroundImage,
-    backgroundOrigin,
-    backgroundRepeat,
-    backgroundSize,
+//     // Background
+//     backgrondPosition,
+//     backgroundAttachment,
+//     backgroundClip,
+//     backgroundImage,
+//     backgroundOrigin,
+//     backgroundRepeat,
+//     backgroundSize,
 
-    // Filter
-    filter,
-    blur,
-    brightness,
-    contrast,
-    grayscale,
-    hueRotate,
-    invert,
-    opacityFilter,
-    saturate,
-    sepia,
+//     // Filter
+//     filter,
+//     blur,
+//     brightness,
+//     contrast,
+//     grayscale,
+//     hueRotate,
+//     invert,
+//     opacityFilter,
+//     saturate,
+//     sepia,
 
-    // Position
-    position,
-    top,
-    left,
-    right,
-    bottom,
-    zIndex,
-    objectFit,
+//     // Position
+//     position,
+//     top,
+//     left,
+//     right,
+//     bottom,
+//     zIndex,
+//     objectFit,
 
-    // Border
-    border,
-    borderBottom,
-    borderTop,
-    borderLeft,
-    borderRight,
-    borderCollapse,
-    borderRadius,
-    borderImage,
+//     // Border
+//     border,
+//     borderBottom,
+//     borderTop,
+//     borderLeft,
+//     borderRight,
+//     borderCollapse,
+//     borderRadius,
+//     borderImage,
 
-    // flex
-    flex,
+//     // flex
+//     flex,
 
-    // Font
-    font,
-    lineHeight,
+//     // Font
+//     font,
+//     lineHeight,
 
-    // grid
-    gridTemplate,
-    gridColumn,
-    gridGap,
-    gridRow,
+//     // grid
+//     gridTemplate,
+//     gridColumn,
+//     gridGap,
+//     gridRow,
 
 
-    // List
-    listStyle,
+//     // List
+//     listStyle,
 
-    // Transform
-    transform,
-    translate,
-    rotate,
-    rotate3D,
-    skew,
-    scale,
+//     // Transform
+//     transform,
+//     translate,
+//     rotate,
+//     rotate3D,
+//     skew,
+//     scale,
 
-    // Animation
-    animation,
-    keyframe,
-    createAnimation,
-    transition,
+//     // Animation
+//     animation,
+//     keyframe,
+//     createAnimation,
+//     transition,
 
-    // gradient
-    gradient,
-    key,
-}
+//     // gradient
+//     gradient,
+//     key,
+// }
 
 type selectorAutofill = '&:hover'|'&:focus'|'&:focus-visible'|'&:focus-within'|'&:active'|'&:visited'|'&:link'|'&:first-child'|'&:last-child'|'&:nth-last-child'|'&:only-child'|'&:first-of-type'|'&:last-of-type'|'&:nth-last-of-type'|'&:only-of-type'|'&:empty'|'&:target'|'&:enabled'|'&:disabled'|'&:checked'|'&:not'|'&:root'|'&:nth-last-child'|'&:nth-last-of-type'|'&:first'|'&:last'|'&:only'|'&:read-only'|'&:read-write'|'&:placeholder-shown'|'&:default'|'&:valid'|'&:invalid'|'&:in-range'|'&:out-of-range'|'&:required'|'&:optional'|'&:dir'|'&:lang'|'&:current'|'&:past'|'&:future'|'&:scope'|'&:indeterminate'|'&:user-invalid'|'&:user-valid'|'&:drop'
 /**

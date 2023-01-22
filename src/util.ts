@@ -1,5 +1,5 @@
-import { UnitValue, UnitValueGrid, UnitValueRotation } from "interfaces"
-import StyleSheet from "stylesheet"
+import { UnitValue, UnitValueGrid, UnitValueRotation } from "./interfaces.js"
+import {StyleSheet} from "./stylesheet.js"
 
 export type unit = 'px'|'em'|'rem'|'vh'|'vw'|'vmin'|'vmax'|'%'|'s'|''
 export type unitGrid = 'px'|'em'|'rem'|'vh'|'vw'|'vmin'|'vmax'|'%'|'fr'|'s'|''

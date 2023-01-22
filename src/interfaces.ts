@@ -1,4 +1,4 @@
-import { Stylesheet } from "./style.js"
+import { RGB, StyleSheet } from "./style.js"
 import { unit, unitGrid, unitRotation } from "./util.js"
 
 export interface PaddingMargin {
@@ -32,7 +32,7 @@ export interface WidthHeight {
 }
 
 export interface CompilerOptions {
-    input: string|Stylesheet,
+    input: string|StyleSheet,
     outpath?: string,
     silent?: boolean,
     removeEmptySelectors?: boolean,
@@ -117,4 +117,25 @@ export interface BorderRadius {
     topRight?: UnitValue,
     bottomLeft?: UnitValue,
     bottomRight?: UnitValue,
+}
+
+export interface Text {
+    align?: 'left' | 'right' | 'center' | 'justify' | 'justify-all' | 'start' | 'end' | 'match-parent',
+    indent?: UnitValue,
+    transform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase' | 'full-width' | 'full-size-kana',
+    decoration?: TextDecoration | "none",
+    emphasis?: TextEmphasis,
+    orientation?: 'mixed' | 'upright' | 'sideways',
+}
+
+export interface TextEmphasis {
+    style?: 'none' | 'circle' | 'dot' | 'disc' | 'double-circle' | 'triangle' | 'sesame',
+    color?: RGB
+}
+
+export interface TextDecoration {
+    color?: RGB,
+    style?: 'solid' | 'double' | 'dotted' | 'dashed' | 'wavy',
+    thickness?: UnitValue,
+    line?: 'none' | 'underline' | 'overline' | 'line-through' | 'blink',
 }
