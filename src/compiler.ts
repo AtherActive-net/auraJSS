@@ -9,6 +9,7 @@ let options:CompilerOptions;
  * @param {string | StyleSheet}input The input file. You can also directly specify a Stylesheet object.
  * @param {string} outpath output file path
  * @param {boolean} silent Define wether or not the compiler should log messages (default: true)
+ * @param {boolean} scssCompatible Define wether or not the compiler should output SCSS compatible CSS (default: false)
  * @returns A written file containing the generated CSS. It also returns the CSS string.
  */
 export async function compile(opts:CompilerOptions={input:undefined}) {
